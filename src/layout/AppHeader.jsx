@@ -1,14 +1,112 @@
 'use client';
 
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+
 /**
- * AppSideBar: Provides a mobile-responsive navigation sidebar 
- * with support for nested sub-menu items.
+ * Header Component - Navigation bar for "I Fortunelli" Bar & Trattoria.
+ * Implements a fully responsive layout with a static light theme and a dynamic mobile drawer menu.
  */
-export default function AppSideBar() {
-  
+export default function Header() {
+    // State hook to toggle the visibility of the mobile navigation dropdown drawer
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <header>
-           header
+        // Sticky structural wrapper with layer stacking (z-50) and blur backdrop styling
+        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
+            <div className="mx-auto flex h-25 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+
+                {/* BRAND IDENTITY: Optimized round logo asset and responsive restaurant typography */}
+                <Link href="/" className="flex items-center gap-3 group">
+                    <Image
+                        src="/logo.png"
+                        alt="Trattoria Bar I Fortunelli Logo"
+                        width={100}
+                        height={100}
+                        className="h-18 w-18 object-cover transition-transform duration-300 group-hover:scale-110 rounded-full"
+                        priority // LCP Optimization: Prevents layout shifts on above-the-fold critical navigation elements
+                    />
+                    <div className="flex flex-col relative">
+                        <span className="font-bold text-2xl leading-tight tracking-tight text-amber-900 font-serif">
+                            I Fortunelli
+                        </span>
+                        <span className="text-sm text-gray-500 tracking-widest uppercase">
+                            Bar & Trattoria
+                        </span>
+                    </div>
+                </Link>
+
+                {/* DESKTOP NAVIGATION: Viewport-adaptive menu hidden on small mobile displays, active from medium breakpoints up */}
+                <nav className="hidden md:flex items-center gap-8 text-lg font-medium text-gray-700">
+                    <Link href="/i-piatti" className="transition-colors hover:text-amber-600">
+                        I Piatti
+                    </Link>
+                    <Link href="/la-nostra-storia" className="transition-colors hover:text-amber-600">
+                        La Nostra Storia
+                    </Link>
+                    <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
+                        Dove Siamo
+                    </Link>
+
+                    {/* CALL TO ACTION: Direct phone protocol handler to streamline mobile reservation workflows */}
+                    <Link
+                        href="tel:+393491061911"
+                        className="rounded-full bg-amber-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-amber-700 hover:shadow"
+                    >
+                        Prenota un Tavolo
+                    </Link>
+                </nav>
+
+                {/* MOBILE NAVIGATION TRIGGER: Interactive hamburger toggle control button */}
+                <div className="flex md:hidden">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        type="button"
+                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none"
+                        aria-controls="mobile-menu"
+                        aria-expanded="false"
+                    >
+                        <span className="sr-only">Apri menu principale</span>
+                        {isOpen ? (
+                            // Close "X" icon rendered when the mobile view state is active
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        ) : (
+                            // Hamburger lines icon rendered when the mobile view state is inactive
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        )}
+                    </button>
+                </div>
+            </div>
+
+            {/* MOBILE DROPDOWN MENU: Conditionally mounted navigation panel utilizing CSS fade animation utilities */}
+            {isOpen && (
+                <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 animate-fade-in">
+                    <div className="flex flex-col gap-4 text-base font-medium text-gray-700">
+                        <Link href="/i-piatti" className="transition-colors hover:text-amber-600">
+                            I Piatti
+                        </Link>
+                        <Link href="/la-nostra-storia" className="transition-colors hover:text-amber-600">
+                            La Nostra Storia
+                        </Link>
+                        <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
+                            Dove Siamo
+                        </Link>
+
+                        {/* Mobile-optimized Call to Action matching desktop interactive specifications */}
+                        <Link
+                            href="tel:+393491061911"
+                            className="rounded-full bg-amber-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-amber-700 hover:shadow"
+                        >
+                            Prenota un Tavolo
+                        </Link>
+                    </div>
+                </div>
+            )}
         </header>
     );
 }

@@ -15,18 +15,6 @@ const geistMono = Geist_Mono({
 });
 
 
-// Script to prevent theme flickering on initial load
-const themeInitScript = `
-(function () {
-  try {
-    var theme = localStorage.getItem('theme');
-    var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (theme === 'dark' || (!theme && systemDark)) {
-      document.documentElement.classList.add('dark');
-    }
-  } catch (e) {}
-})();
-`;
 
 // Script to force a page reload when navigating via back/forward browser buttons (bfcache)
 const bfcacheRecoveryScript = `
@@ -55,8 +43,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it" suppressHydrationWarning>
       <head>
-        {/* Inject scripts to handle theme persistence and browser navigation recovery */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        {/* Inject scripts to browser navigation recovery */}
         <script dangerouslySetInnerHTML={{ __html: bfcacheRecoveryScript }} />
       </head>
       <body>
