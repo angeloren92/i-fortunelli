@@ -1,5 +1,5 @@
 // src/app/chi-sono/page.jsx
-import ChiSonoView from './ChiSonoView';
+import ChiSonoView from './LaNostraStoria';
 
 
 export default function Page() {

@@ -14,8 +14,8 @@ export default function Header() {
 
     return (
         // Sticky structural wrapper with layer stacking (z-50) and blur backdrop styling
-        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/95 backdrop-blur-md">
-            <div className="mx-auto flex h-25 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md min-h-[15dvh]">
+            <div className="mx-auto flex min-h-[15dvh] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
                 {/* BRAND IDENTITY: Optimized round logo asset and responsive restaurant typography */}
                 <Link href="/" className="flex items-center gap-3 group">
@@ -24,7 +24,7 @@ export default function Header() {
                         alt="Trattoria Bar I Fortunelli Logo"
                         width={100}
                         height={100}
-                        className="h-18 w-18 object-cover transition-transform duration-300 group-hover:scale-110 rounded-full"
+                        className="max-h-30 max-w-30 object-cover transition-transform duration-300 group-hover:scale-110 rounded-full"
                         priority // LCP Optimization: Prevents layout shifts on above-the-fold critical navigation elements
                     />
                     <div className="flex flex-col relative">

@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Task: Creazione Sezione Main per Sito Web "Bar Trattoria I Fortunelli"
 
-## Getting Started
+## Contesto Tecnologico
+- **Framework:** Next.js (App Router)
+- **Stile:** Tailwind CSS
+- **Stato attuale:** Header e Footer sono già pronti. Devi generare **esclusivamente** il contenuto del tag `<main>` da inserire in `src/app/page.tsx`.
 
-First, run the development server:
+## Informazioni sul Locale
+- **Nome:** Bar Trattoria I Fortunelli
+- **Località:** Collegiove (RI)
+- **Stile del locale:** Accogliente, cucina casareccia tipica del territorio, atmosfera di paese, perfetto sia per una pausa caffè/aperitivo al bar che per un pranzo o cena in trattoria.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Richiesta di Codice: Sezione `<main>`
+Genera il componente principale per la Home Page strutturato nelle seguenti sezioni interne (tutte inserite dentro un unico tag `<main>` semantico):
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 1. Sezione Hero (Impatto Visivo)
+- Un background d'impatto (usa un placeholder di Unsplash per l'immagine, es. cibo o un borgo italiano).
+- Titolo principale (H1) con il nome del locale "Bar Trattoria I Fortunelli".
+- Sottotitolo emozionale che richiami la tradizione e l'accoglienza di Collegiove.
+- Un pulsante di Call-to-Action (CTA) chiaro: "Scopri il Menu" (che punta a `/menu`) e uno "Prenota un Tavolo" (pulsante per chiamata rapida).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Sezione "Chi Siamo / La Nostra Storia"
+- Layout a due colonne (Testo a sinistra, immagine a destra - invertito su mobile).
+- Un breve testo che racconti la passione per la buona cucina, i prodotti a chilometro zero e l'atmosfera autentica della trattoria.
 
-## Learn More
+### 3. Sezione "Galleria Instagram" (Griglia Immagini)
+Una griglia responsive (1 colonna su mobile, 2 su tablet, 3 o 4 su desktop) che mostra le foto del locale e dei piatti:
+- Crea un array di oggetti finti (mock data) chiamato `instagramPosts`. Ogni oggetto deve avere `id`, `media_url` (usa link Unsplash con keyword tipo `italian-food`, `coffee`), `permalink` (link finto di Instagram) e `caption`.
+- Fai un ciclo `.map()` su questo array per generare le card fotografiche.
+- **Effetti Visivi:** Ogni immagine deve essere quadrata (`aspect-square`) con un effetto *hover* (es. leggero zoom `hover:scale-105 transition duration-300` e un overlay scuro che mostra la didascalia/caption quando ci si passa sopra con il mouse).
+- Sotto la griglia, inserisci un pulsante centrato "Seguici su Instagram" con un'icona o emoji del social.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Sezione "Orari e Dove Trovarci"
+- Layout a due colonne:
+  - **Sinistra:** Orari di apertura (chiaro e leggibile) e indirizzo completo ("Via Umberto I 135, 02020 Collegiove (RI)").
+  - **Destra:** Un box placeholder per la mappa (un div stilizzato con Tailwind che simula Google Maps).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Linee Guida per i Tipi Tailwind
+- Usa classi Tailwind per garantire che il layout sia **completamente responsive** (Mobile First).
+- Sfrutta colori caldi e moderni adatti a una trattoria (es. toni di amber, emerald, slate o stone).
+- Assicurati che tutto il codice sia pulito, senza l'utilizzo di `any`.
