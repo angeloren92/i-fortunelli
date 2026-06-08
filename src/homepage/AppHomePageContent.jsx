@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaWhatsapp } from "react-icons/fa";
 
 /**
  * AppHomePageContent Component
@@ -14,46 +15,59 @@ export default function AppHomePageContent() {
     const instagramPosts = [
         {
             id: 1,
-            media_url: 'https://images.unsplash.com/photo-1504674900247-087700ce8c7d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuLWZvb2QlMjBwYXN0YXxlbnwwfHx8fDE3MTc4NTkzNzV8MA&ixlib=rb-4.0.3&q=80&w=1080',
-            permalink: 'https://www.instagram.com/p/mock1/',
-            caption: 'Deliziosa pasta fatta in casa!'
+            media_url: '/tagliere_misto.jpg',
+            permalink: 'https://www.instagram.com/p/mock5/',
+            caption: 'Abbondante tagliere misto di salumi e formaggi tipici di Collegiove'
         },
         {
             id: 2,
-            media_url: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxjb2ZmZWUlMjBhcnR8ZW58MHx8fHwxNzE3ODU5Mzc2fDA&ixlib=rb-4.0.3&q=80&w=1080',
-            permalink: 'https://www.instagram.com/p/mock2/',
-            caption: 'Il caffè perfetto per iniziare la giornata.'
+            media_url: '/pasta_e_fagioli.jpg',
+            permalink: 'https://www.instagram.com/p/mock4/',
+            caption: 'Tradizionale pasta e fagioli ricca e cremosa'
+
         },
         {
             id: 3,
-            media_url: 'https://images.unsplash.com/photo-1590989078657-0836262451f2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuLWZvb2QlMjBwaXp6YXxlbnwwfHx8fDE3MTc4NTkzNzV8MA&ixlib=rb-4.0.3&q=80&w=1080',
-            permalink: 'https://www.instagram.com/p/mock3/',
-            caption: 'La nostra pizza, un classic intramontabile.'
+            media_url: '/tartufo_e_guanciale.jpg',
+            permalink: 'https://www.instagram.com/p/mock6/',
+            caption: 'Specialità della casa con tartufo locale e guanciale croccante'
         },
         {
             id: 4,
-            media_url: 'https://images.unsplash.com/photo-1517457210-bf26f4044c2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuLWZvb2QlMjBkZXNzZXJ0fGVufDB8fHx8MTcxNzg1OTM3Nnww&ixlib=rb-4.0.3&q=80&w=1080',
-            permalink: 'https://www.instagram.com/p/mock4/',
-            caption: 'Dolci tentazioni per chiudere in bellezza.'
+            media_url: '/grigliata_mista.jpg',
+            permalink: 'https://www.instagram.com/p/mock1/',
+            caption: 'Ricca grigliata mista di carne con prodotti locali'
         },
         {
             id: 5,
-            media_url: 'https://images.unsplash.com/photo-1595147575231-15b741549e59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxiaXN0cm8lMjBpbnRlcmlvcnxlbnwwfHx8fDE3MTc4NTkzNzd8MA&ixlib=rb-4.0.3&q=80&w=1080',
-            permalink: 'https://www.instagram.com/p/mock5/',
-            caption: 'Atmosfera accogliente nel cuore di Collegiove.'
+            media_url: '/tagliata_con_porcini.jpg',
+            permalink: 'https://www.instagram.com/p/mock1/',
+            caption: 'Tagliata di carne tenera accompagnata da funghi porcini'
         },
         {
             id: 6,
-            media_url: 'https://images.unsplash.com/photo-1522204746404-3f71c4c81041?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxpbnRlcmlvciUyMGJhcnxlbnwwfHx8fDE3MTc4NTkzNzd8MA&ixlib=rb-4.0.3&q=80&w=1080',
+            media_url: '/panino_gourmet.jpg',
+            permalink: 'https://www.instagram.com/p/mock3/',
+            caption: 'Panino gourmet farcito con ingredienti del territorio'
+        },
+        {
+            id: 7,
+            media_url: '/pinsa_zucca_e_guanciale.jpg',
             permalink: 'https://www.instagram.com/p/mock6/',
-            caption: 'Il nostro bar, sempre pronto ad accogliervi.'
+            caption: 'Pinsa autunnale con crema di zucca e guanciale del posto'
+        },
+        {
+            id: 8,
+            media_url: '/tiramisu.jpg',
+            permalink: 'https://www.instagram.com/p/mock6/',
+            caption: 'Tiramisù artigianale fatto in casa secondo la ricetta classica'
         }
     ];
 
     // Array of sliding images for the background video effect
     const heroImages = [
         { url: "/grigliata_mista.jpg", alt: "Ricca grigliata mista di carne con prodotti locali" },
-        { url: "/maritozzo_panna.jpg", alt: "Maritozzo artigianale con panna fresca della casa" },
+        { url: "/maritozzo_panna.jpg", alt: "Maritozzo artigianale con panna fresca" },
         { url: "/panino_gourmet.jpg", alt: "Panino gourmet farcito con ingredienti del territorio" },
         { url: "/pasta_e_fagioli.jpg", alt: "Tradizionale pasta e fagioli ricca e cremosa" },
         { url: "/pasta_guanciale_e_carciofini.jpg", alt: "Primo piatto di pasta con guanciale croccante e carciofini" },
@@ -66,7 +80,7 @@ export default function AppHomePageContent() {
         { url: "/scaloppine_con_pancetta.jpg", alt: "Tenere scaloppine di carne impreziosite con pancetta" },
         { url: "/spaghetti.jpg", alt: "Un classico piatto di spaghetti della tradizione italiana" },
         { url: "/stufato_di_carne.jpg", alt: "Stufato di carne locale cotto lentamente come una volta" },
-        { url: "/tagliata_con_porcini.jpg", alt: "Tagliata di carne tenera accompagnata da funghi porcini frescos" },
+        { url: "/tagliata_con_porcini.jpg", alt: "Tagliata di carne tenera accompagnata da funghi porcini" },
         { url: "/tagliere_misto.jpg", alt: "Abbondante tagliere misto di salumi e formaggi tipici di Collegiove" },
         { url: "/tartufo_e_guanciale.jpg", alt: "Specialità della casa con tartufo locale e guanciale croccante" },
         { url: "/tiramisu.jpg", alt: "Tiramisù artigianale fatto in casa secondo la ricetta classica" }
@@ -76,7 +90,7 @@ export default function AppHomePageContent() {
         <main className="relative min-h-screen w-full overflow-x-hidden bg-stone-50">
 
             {/* SECTION 1: Dynamic Hero Banner with Infinite Horizontal Scroll Video Effect */}
-            <section className="relative w-full bg-stone-900 flex items-center justify-center min-h-[85dvh] overflow-hidden">
+            <section className="relative w-full bg-stone-500 flex items-center justify-center min-h-[85dvh] overflow-hidden">
 
                 {/* Background Carousel track adjusted to match container height exactly */}
                 <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden py-3">
@@ -185,7 +199,7 @@ export default function AppHomePageContent() {
                     </div>
                     <div className="text-center mt-12">
                         <a
-                            href="https://www.instagram.com/i_fortunelli/"
+                            href="https://www.instagram.com/bar_trattoria_i_fortunelli/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 inline-flex items-center shadow-md transform hover:-translate-y-0.5"
@@ -215,6 +229,9 @@ export default function AppHomePageContent() {
                                         <span>Mercoledì - Lunedì:</span>
                                         <span>08:00 - 23:00</span>
                                     </li>
+                                    <li>
+                                        Gli orari potrebbero subire variazioni durante le Festività
+                                    </li>
                                 </ul>
                             </div>
 
@@ -225,7 +242,15 @@ export default function AppHomePageContent() {
                                 <p className="text-stone-700 text-base mb-1 font-medium">Bar Trattoria I Fortunelli</p>
                                 <p className="text-stone-600 text-base mb-4">Via Roma 112, 02020 Collegiove (RI)</p>
                                 <p className="text-stone-800 font-semibold pt-2 border-t border-stone-100">
-                                    Telefono Rapido: <a href="tel:+393491061911" className="text-emerald-700 hover:underline">+39 349 106 1911</a>
+                                    Telefono: <a href="tel:+393332510720" className="text-emerald-700 hover:underline">+39 333 2510 720</a> <a
+                                        href="https://wa.me/393332510720"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-emerald-700 hover:text-emerald-500 transition-colors inline-flex items-center align-middle ml-2 text-xl"
+                                        aria-label="Chatta su WhatsApp"
+                                    >
+                                        <FaWhatsapp />
+                                    </a>
                                 </p>
                             </div>
                         </div>
@@ -237,11 +262,11 @@ export default function AppHomePageContent() {
                             <span className="mr-2">🗺️</span> La Nostra Posizione nel Borgo
                         </h3>
                         <div className="w-full h-full rounded-2xl shadow-lg overflow-hidden border border-stone-200 min-h-[350px]">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1478.4399398210924!2d13.037742631873435!3d42.17425091920932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132fbda9931d256d%3A0x77ec4cadda7b9e85!2sBar%20Trattoria%20%22I%20Fortunelli%22!5e0!3m2!1sit!2sit!4v1780914452471!5m2!1sit!2sit" 
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1478.4399398210924!2d13.037742631873435!3d42.17425091920932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132fbda9931d256d%3A0x77ec4cadda7b9e85!2sBar%20Trattoria%20%22I%20Fortunelli%22!5e0!3m2!1sit!2sit!4v1780914452471!5m2!1sit!2sit"
                                 className="w-full h-full min-h-[350px]"
-                                style={{ border: 0 }} 
-                                loading="lazy" 
+                                style={{ border: 0 }}
+                                loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
                             ></iframe>
                         </div>

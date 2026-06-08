@@ -9,5 +9,5 @@
   }
 
   /* 2. Creiamo la classe unendo movimento, tempo e loop */
-  --animate-infinite-scroll: infinite-scroll 88s linear infinite;
+  --animate-infinite-scroll: infinite-scroll 100s linear infinite;
 }
