@@ -169,7 +169,7 @@ export default function AppHomePageContent() {
             </section>
 
             {/* SECTION 3: Social Proof / Visual Media Instagram Gallery Grid */}
-            <section className="py-20 bg-stone-200">
+            <section className="py-10 md:py-20 bg-stone-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-xl mx-auto mb-12">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-3">La Nostra Galleria Instagram</h2>
@@ -211,7 +211,7 @@ export default function AppHomePageContent() {
             </section>
 
             {/* SECTION 4: Logistics / Operational Hours and Geo-location Components */}
-            <section className="py-20 bg-stone-100">
+            <section className="py-10 md:py-20 bg-stone-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch gap-12">
                     <div className="md:w-1/2 flex flex-col justify-between">
                         <div>

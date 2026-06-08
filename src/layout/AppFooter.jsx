@@ -2,6 +2,8 @@
 
 import { useState, useContext } from 'react';
 import { GlobalContext } from '@/context/GlobalContext';
+import { FaFacebook } from "react-icons/fa";
+import { FaSquareInstagram } from "react-icons/fa6";
 
 /**
  * AppFooter Component
@@ -14,10 +16,10 @@ export default function AppFooter() {
     const { businessDetails } = useContext(GlobalContext);
 
     return (
-        <footer className="py-12 bg-stone-200 mt-auto">
+        <footer className="py-6 bg-stone-200 mt-auto">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-                    
+
                     {/* Column 1: Corporate Contact Information */}
                     <div className="text-center md:text-left">
                         <h5 className="font-semibold text-gray-800">Contattaci</h5>
@@ -41,18 +43,29 @@ export default function AppFooter() {
 
                     {/* Column 2: Social Media Platforms Ecosystem */}
                     <div className="text-center md:text-left">
-                        <h5 className="font-semibold text-gray-800">Social</h5>
-                        <ul className="mt-4">
-                            <li className="flex items-center mt-2">
-                                <a href="#" className="text-amber-600 hover:underline">Facebook</a>
-                            </li>
-                            <li className="flex items-center mt-2">
-                                <a href="#" className="text-amber-600 hover:underline">Twitter</a>
-                            </li>
-                            <li className="flex items-center mt-2">
-                                <a href="#" className="text-amber-600 hover:underline">Instagram</a>
-                            </li>
-                        </ul>
+                        <h5 className="font-semibold text-gray-800 tracking-wide">Social</h5>
+
+                        <div className="mt-4 flex justify-center md:justify-start items-center gap-4">
+                            <a
+                                href="https://www.facebook.com/p/Bar-trattoria-i-fortunelli-61574194377848/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#1877F2] hover:scale-110 hover:opacity-90 transition-all duration-200 text-3xl"
+                                aria-label="Seguici su Facebook"
+                            >
+                                <FaFacebook />
+                            </a>
+
+                            <a
+                                href="https://www.instagram.com/bar_trattoria_i_fortunelli/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-[#E1306C] hover:scale-110 hover:opacity-90 transition-all duration-200 text-3xl"
+                                aria-label="Seguici su Instagram"
+                            >
+                                <FaSquareInstagram />
+                            </a>
+                        </div>
                     </div>
 
                     {/* Column 3: Legal Documentation and Compliance Links */}
@@ -69,8 +82,6 @@ export default function AppFooter() {
                     </div>
                 </div>
 
-                {/* Decorative Divider */}
-                <hr className="mt-8 border-gray-300" />
 
                 {/* Footer Copyright and Legal Rights Notice */}
                 <div className="flex justify-center mt-6">
