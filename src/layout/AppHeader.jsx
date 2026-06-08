@@ -48,14 +48,6 @@ export default function Header() {
                     <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
                         Dove Siamo
                     </Link>
-
-                    {/* CALL TO ACTION: Direct phone protocol handler to streamline mobile reservation workflows */}
-                    <Link
-                        href="tel:+393491061911"
-                        className="rounded-full bg-amber-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-amber-700 hover:shadow"
-                    >
-                        Prenota un Tavolo
-                    </Link>
                 </nav>
 
                 {/* MOBILE NAVIGATION TRIGGER: Interactive hamburger toggle control button */}
@@ -95,14 +87,6 @@ export default function Header() {
                         </Link>
                         <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
                             Dove Siamo
-                        </Link>
-
-                        {/* Mobile-optimized Call to Action matching desktop interactive specifications */}
-                        <Link
-                            href="tel:+393491061911"
-                            className="rounded-full bg-amber-600 px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-amber-700 hover:shadow"
-                        >
-                            Prenota un Tavolo
                         </Link>
                     </div>
                 </div>

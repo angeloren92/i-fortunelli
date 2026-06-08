@@ -33,7 +33,7 @@ const attivitaLocali = [
         title: "Itinerari in Moto",
         short: "La sosta perfetta tra le curve e i panorami della zona.",
         details: "Le strade che portano a Collegiove e costeggiano i laghi della zona sono tra le più amate dai motociclisti per la qualità dell'asfalto, i panorami mozzafiato e le curve divertenti.",
-        tip: "🏍️ Bikers Welcome: ampio spazio esterno dove parcheggiare le moto in totale sicurezza mentre ti godi un pranzo all'aperto o un aperitivo fresco al bar prima di rimetterti in sella.",
+        tip: "🏍️ Bikers Welcome: Ampio spazio esterno dove parcheggiare le moto in totale sicurezza mentre ti godi un pranzo all'aperto o un aperitivo fresco al bar prima di rimetterti in sella.",
         icon: (
             <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5M3 9.75h18M3 14.25h18" />
