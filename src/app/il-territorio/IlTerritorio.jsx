@@ -288,7 +288,7 @@ export default function IlTerritorio() {
                                                                             src={item.media[currentSlide]}
                                                                             alt={`${item.title} slide ${currentSlide + 1}`}
                                                                             fill
-                                                                            sizes="(max-w-1024px) 100vw, (max-w-1200px) 50vw, 50vw"
+                                                                            sizes="(max-w-1024px) 100vw, (max-w-1200px) 100vw, 100vw"
                                                                             className="object-cover transition-all duration-500 select-none pointer-events-none"
                                                                         />
                                                                         
