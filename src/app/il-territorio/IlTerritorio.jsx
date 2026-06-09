@@ -249,7 +249,7 @@ export default function IlTerritorio() {
                                                             {Array.isArray(item.media) ? (
                                                                 /* --- INTERFACCIA CAROSELLO (IMMAGINI) --- */
                                                                 <div 
-                                                                    className="relative w-full aspect-video rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel"
+                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel"
                                                                     onClick={(e) => e.stopPropagation()} // Blocca aperture involontarie sul contenitore
                                                                 >
                                                                     <img
@@ -297,7 +297,7 @@ export default function IlTerritorio() {
                                                             ) : (
                                                                 /* --- INTERFACCIA PLAYER (VIDEO SINGOLO) --- */
                                                                 <div 
-                                                                    className="relative w-full aspect-video rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black"
+                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black"
                                                                     onClick={(e) => e.stopPropagation()}
                                                                 >
                                                                     <video
