@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+// Importiamo il componente Image ottimizzato di Next.js
+import Image from "next/image";
 
 // CONFIGURAZIONE STRUTTURATA DEL TERRITORIO
 const sezioniTerritorio = [
@@ -21,7 +23,6 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h22.5m-22.5 0a9 9 0 1118 0 9 9 0 01-18 0z" />
                     </svg>
                 ),
-                // Array di immagini -> Attiva automaticamente il Carosello
                 media: ["/trk1.jpeg", "/trk2.jpeg", "/trk3.jpeg", "/trk4.jpeg", "/trk5.jpeg", "/trk6.jpeg", "/trk7.jpeg"]
             },
             {
@@ -32,11 +33,10 @@ const sezioniTerritorio = [
                 tip: "🏍️ 🚴 Bikers & Cyclists Welcome: Disponiamo di un ampio spazio esterno sicuro per parcheggiare moto e bici. Fermati da noi per ricaricare le borracce, una pausa caffè o un pranzo completo recupera-forze.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75zM17.85 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 1 0 0-6.75 3.375 3.375 0 0 0 0 6.75zM17.85 17.25a3.375 3.375 0 1 0 0-6.75 3.375 3.375 0 0 0 0 6.75z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
                     </svg>
                 ),
-                // Stringa singola video -> Attiva il Player Video
                 media: "/video.mp4"
             },
             {
@@ -58,7 +58,7 @@ const sezioniTerritorio = [
                 title: "La Chiesa del Borgo",
                 short: "Storia e cultura a pochi passi da noi.",
                 details: "A pochissimi minuti a piedi dalla trattoria si può raggiungere il nucleo storico del borgo e visitare la caratteristica chiesa locale, custode della memoria storica e spirituale della nostra piccola comunità di montagna.",
-                tip: "⛪ Un luogo di pace perfetto per scattare qualche fotografia panoramica e assavorare l'atmosfera autentica dei vecchi borghi italiani.",
+                tip: "⛪ Un luogo di pace perfetto per scattare qualche fotografia panoramica e assaporare l'atmosfera autentica dei vecchi borghi italiani.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
@@ -101,8 +101,8 @@ const sezioniTerritorio = [
                 id: "centro-anziani",
                 title: "Centro Anziani Collegiove",
                 short: "Il cuore della memoria storica.",
-                details: "Luogo di ritrovo fundamental per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
-                tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani se custodiamo i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
+                details: "Luogo di ritrovo fondamentale per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
+                tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani si custodiscono i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
@@ -132,7 +132,7 @@ const sezioniTerritorio = [
                 id: "infiorata",
                 title: "Infiorata del Corpus Domini",
                 short: "Gli storici vicoli coperti da disegni.",
-                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una tradizione spettacolare: le streets del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
+                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una tradizione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
                 tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i tappeti floreali intatti e profumatissimi prima della processione, per poi fermarti a pranzo da noi.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -146,27 +146,43 @@ const sezioniTerritorio = [
 
 export default function IlTerritorio() {
     const [activeId, setActiveId] = useState(null);
-    
-    // Stato per tracciare l'indice dell'immagine corrente di ogni singolo carosello (mappato sull'id della card)
     const [caroselloIndexes, setCaroselloIndexes] = useState({});
+    const [touchStartX, setTouchStartX] = useState(0);
 
     const toggleAccordion = (id) => {
         setActiveId(activeId === id ? null : id);
     };
 
-    // Funzione per scorrere le immagini del carosello
     const handleNextSlide = (e, cardId, arrayLength) => {
-        e.stopPropagation(); // Previene la chiusura dell'accordion
+        if (e) e.stopPropagation();
         const currentIndex = caroselloIndexes[cardId] || 0;
         const nextIndex = currentIndex === arrayLength - 1 ? 0 : currentIndex + 1;
         setCaroselloIndexes({ ...caroselloIndexes, [cardId]: nextIndex });
     };
 
     const handlePrevSlide = (e, cardId, arrayLength) => {
-        e.stopPropagation(); // Previene la chiusura dell'accordion
+        if (e) e.stopPropagation();
         const currentIndex = caroselloIndexes[cardId] || 0;
         const prevIndex = currentIndex === 0 ? arrayLength - 1 : currentIndex - 1;
         setCaroselloIndexes({ ...caroselloIndexes, [cardId]: prevIndex });
+    };
+
+    const handleTouchStart = (e) => {
+        e.stopPropagation();
+        setTouchStartX(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = (e, cardId, arrayLength) => {
+        e.stopPropagation();
+        const touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+        const threshold = 50;
+
+        if (diff > threshold) {
+            handleNextSlide(null, cardId, arrayLength);
+        } else if (diff < -threshold) {
+            handlePrevSlide(null, cardId, arrayLength);
+        }
     };
 
     return (
@@ -182,7 +198,7 @@ export default function IlTerritorio() {
                         Vivi e Scopri Collegiove
                     </h2>
                     <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                        Abbiamo diviso le meraviglie del nostro territory per aiutarti con la giornata nel borgo.
+                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
                     </p>
                 </div>
 
@@ -212,11 +228,10 @@ export default function IlTerritorio() {
                                             key={item.id}
                                             onClick={() => toggleAccordion(item.id)}
                                             type="button"
-                                            className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none ${
-                                                isExpanded
+                                            className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none ${isExpanded
                                                     ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
                                                     : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
-                                            }`}
+                                                }`}
                                         >
                                             <div className="flex justify-between items-start mb-4">
                                                 <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
@@ -243,44 +258,47 @@ export default function IlTerritorio() {
                                                         {item.details}
                                                     </p>
 
-                                                    {/* GESTIONE DINAMICA DEI MEDIA (ARRAY vs STRINGA) */}
+                                                    {/* SEZIONE MEDIA CON TAG IMAGE DI NEXT.JS (FORMATO 1/1) */}
                                                     {item.media && (
                                                         <div className="my-3">
                                                             {Array.isArray(item.media) ? (
-                                                                /* --- INTERFACCIA CAROSELLO (IMMAGINI) --- */
+                                                                
+                                                                /* --- INTERFACCIA CAROSELLO CON TAG IMAGE --- */
                                                                 <div 
-                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel"
-                                                                    onClick={(e) => e.stopPropagation()} // Blocca aperture involontarie sul contenitore
+                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                    onTouchStart={handleTouchStart}
+                                                                    onTouchEnd={(e) => handleTouchEnd(e, item.id, item.media.length)}
                                                                 >
-                                                                    <img
+                                                                    {/* Utilizzo del tag <Image> con impostazione di riempimento responsivo (fill) */}
+                                                                    <Image
                                                                         src={item.media[currentSlide]}
                                                                         alt={`${item.title} slide ${currentSlide + 1}`}
-                                                                        className="w-full h-full object-cover transition-all duration-500 select-none"
+                                                                        fill
+                                                                        sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                                                                        className="object-cover transition-all duration-500 select-none pointer-events-none"
                                                                     />
                                                                     
                                                                     {item.media.length > 1 && (
                                                                         <>
-                                                                            {/* Freccia Indietro */}
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
-                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none"
+                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex"
                                                                             >
                                                                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                                                                                 </svg>
                                                                             </button>
-                                                                            {/* Freccia Avanti */}
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
-                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none"
+                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex"
                                                                             >
                                                                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                                                                 </svg>
                                                                             </button>
-                                                                            {/* Indicatori a punti (Dots) */}
                                                                             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs">
                                                                                 {item.media.map((_, idx) => (
                                                                                     <span
@@ -295,7 +313,7 @@ export default function IlTerritorio() {
                                                                     )}
                                                                 </div>
                                                             ) : (
-                                                                /* --- INTERFACCIA PLAYER (VIDEO SINGOLO) --- */
+                                                                /* --- INTERFACCIA PLAYER VIDEO 1/1 (Inalterata, i video usano tag HTML5 nativo) --- */
                                                                 <div 
                                                                     className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black"
                                                                     onClick={(e) => e.stopPropagation()}
