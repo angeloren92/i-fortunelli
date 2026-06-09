@@ -86,6 +86,61 @@ export default function AppHomePageContent() {
         { url: "/tiramisu.jpg", alt: "Tiramisù artigianale fatto in casa secondo la ricetta classica" }
     ];
 
+    //Array with services
+    const servizi = [
+        {
+            label: "Accesso Disabili",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.05 4.575a1.575 1.575 0 1 1-3.15 0 1.575 1.575 0 0 1 3.15 0ZM6 10.5h3v4.5H6.75A.75.75 0 0 0 6 15.75v3.75a.75.75 0 0 0 .75.75h2.25M13.5 10.5H21v1.5h-5.25v7.5h-1.5V12h-3v7.5h-1.5V10.5Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.75a3 3 0 0 0-3-3H6.75a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3h4.5a3 3 0 0 0 3-3v-7.5Z" />
+                </svg>
+            )
+        },
+        {
+            label: "Servizio Tabacchi",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.008m0 2.25v.008m0 2.25v.008M12 18a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 21V5.25A2.25 2.25 0 0 0 17.25 3H6.75A2.25 2.25 0 0 0 4.5 5.25V21m15 0H4.5m15 0v-4.5A2.25 2.25 0 0 0 17.25 14.25H6.75A2.25 2.25 0 0 0 4.5 16.5V21" />
+                </svg>
+            )
+        },
+        {
+            label: "Bancomat Paese",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15A2.25 2.25 0 0 0 2.25 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Z" />
+                </svg>
+            )
+        },
+        {
+            label: "Ampio Parcheggio",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h7.5m3 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.5m-16.5-3h16.5M3 12h18M3.104 15.75L4.5 12h15l1.396 3.75H3.104Z" />
+                </svg>
+            )
+        },
+        {
+            label: "Vicino alla Chiesa",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                </svg>
+            )
+        },
+        {
+            label: "Vista Panoramica",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 11.25V18m0 0l-2.25-2.25M12 18l2.25-2.25" />
+                </svg>
+            )
+        }
+    ];
+
     return (
         <main className="relative min-h-screen w-full overflow-x-hidden bg-stone-50">
 
@@ -143,17 +198,40 @@ export default function AppHomePageContent() {
 
             {/* SECTION 2: Identity Presentation / Brand Narrative */}
             <section className="py-10 md:py-20 bg-stone-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-                    <div className="md:w-1/2">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-6 tracking-tight">Benvenuti a I Fortunelli</h2>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+
+                    {/* COLONNA SINISTRA: TESTI + GRIGLIA ICONE */}
+                    <div className="lg:w-1/2">
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-6 tracking-tight">
+                            Benvenuti a I Fortunelli
+                        </h2>
                         <p className="text-stone-600 leading-relaxed mb-4 text-base md:text-lg">
                             Nel cuore di Collegiove, tra il verde incontaminato delle montagne e l&apos;atmosfera autentica di un piccolo borgo, nasce uno spazio che è un po&apos; casa e un po&apos; tradizione.
                         </p>
-                        <p className="text-stone-600 leading-relaxed mb-4 text-base md:text-lg">
+                        <p className="text-stone-600 leading-relaxed mb-6 text-base md:text-lg">
                             Siamo Bar, Trattoria, Bottega alimentare e Tabacchi: il punto di ritrovo ideale per chiunque voglia riscoprire i sapori di una volta.
                         </p>
+
+                        {/* NUOVA SEZIONE ICONE: Griglia di servizi locali */}
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-8 pt-6 border-t border-stone-200">
+                            {servizi.map((servizio, index) => (
+                                <div
+                                    key={index}
+                                    className="flex items-center gap-2.5 bg-white px-3 py-2.5 rounded-xl border border-stone-200/60 shadow-sm"
+                                >
+                                    <div className="flex-shrink-0 p-1.5 bg-amber-50 rounded-lg">
+                                        {servizio.icon}
+                                    </div>
+                                    <span className="text-xs sm:text-sm font-medium text-stone-700 leading-tight">
+                                        {servizio.label}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className="md:w-1/2 w-full">
+
+                    {/* COLONNA DESTRA: IMMAGINE */}
+                    <div className="lg:w-1/2 w-full">
                         <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
                                 src="/foto.png"
@@ -165,6 +243,7 @@ export default function AppHomePageContent() {
                             />
                         </div>
                     </div>
+
                 </div>
             </section>
 
