@@ -252,9 +252,9 @@ export default function AppHomePageContent() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-xl mx-auto mb-12">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-3">La Nostra Galleria Instagram</h2>
-                        <p className="text-stone-600">Scatti rubati dalla nostra cucina e momenti trascorsi insieme nel borgo</p>
+                        <p className="text-stone-600">Scatti dalla nostra cucina e momenti trascorsi insieme nel borgo</p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
                         {instagramPosts.map(post => (
                             <a
                                 key={post.id}
