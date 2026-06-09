@@ -24,7 +24,6 @@ export default function AppHomePageContent() {
             media_url: '/pasta_e_fagioli.jpg',
             permalink: 'https://www.instagram.com/p/mock4/',
             caption: 'Tradizionale pasta e fagioli ricca e cremosa'
-
         },
         {
             id: 3,
@@ -78,7 +77,7 @@ export default function AppHomePageContent() {
         { url: "/polenta_e_salsiccia.jpg", alt: "Polenta calda servita con salsiccia locale al sugo" },
         { url: "/ravioli_tartufo.jpg", alt: "Ravioli fatti in casa con crema al tartufo delle nostre montagne" },
         { url: "/scaloppine_con_pancetta.jpg", alt: "Tenere scaloppine di carne impreziosite con pancetta" },
-        { url: "/spaghetti.jpg", alt: "Un classico piatto di spaghetti della tradizione italiana" },
+        { url: "/spaghetti.jpg", alt: "Un classico piatto di spaghetti della traditione italiana" },
         { url: "/stufato_di_carne.jpg", alt: "Stufato di carne locale cotto lentamente come una volta" },
         { url: "/tagliata_con_porcini.jpg", alt: "Tagliata di carne tenera accompagnata da funghi porcini" },
         { url: "/tagliere_misto.jpg", alt: "Abbondante tagliere misto di salumi e formaggi tipici di Collegiove" },
@@ -151,27 +150,39 @@ export default function AppHomePageContent() {
                 <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden">
                     <div className="w-full h-full inline-flex flex-nowrap [mask-image:_linear-gradient(to_right,transparent_0%,_black_15%,_black_85%,transparent_100%)]">
 
-                        {/* Original track block - matching container height */}
-                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll">
+                        {/* Original track block - Sostituito con Next.js Image e box ad aspect ratio fisso */}
+                        <div className="flex items-center h-full animate-infinite-scroll">
                             {heroImages.map((item, index) => (
-                                <img
-                                    key={`hero-orig-${index}`}
-                                    src={item.url}
-                                    alt={item.alt}
-                                    className="h-full min-h-[85vh] w-auto object-cover shadow-md"
-                                />
+                                <div 
+                                    key={`hero-orig-${index}`} 
+                                    className="relative h-full min-h-[85vh] aspect-[4/3] flex-shrink-0 shadow-md"
+                                >
+                                    <Image
+                                        src={item.url}
+                                        alt={item.alt}
+                                        fill
+                                        sizes="(max-w-768px) 50vw, 33vw"
+                                        className="object-cover"
+                                    />
+                                </div>
                             ))}
                         </div>
 
                         {/* Duplicated track block to guarantee loop continuity */}
-                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
+                        <div className="flex items-center h-full animate-infinite-scroll" aria-hidden="true">
                             {heroImages.map((item, index) => (
-                                <img
-                                    key={`hero-dup-${index}`}
-                                    src={item.url}
-                                    alt={item.alt}
-                                    className="h-full min-h-[85vh] w-auto object-cover shadow-md"
-                                />
+                                <div 
+                                    key={`hero-dup-${index}`} 
+                                    className="relative h-full min-h-[85vh] aspect-[4/3] flex-shrink-0 shadow-md"
+                                >
+                                    <Image
+                                        src={item.url}
+                                        alt={item.alt}
+                                        fill
+                                        sizes="(max-w-768px) 50vw, 33vw"
+                                        className="object-cover"
+                                    />
+                                </div>
                             ))}
                         </div>
                     </div>
@@ -186,7 +197,7 @@ export default function AppHomePageContent() {
                         Bar Trattoria I Fortunelli
                     </h1>
                     <p className="text-lg md:text-2xl text-stone-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                        Nel cuore di un piccolo borgo immerso tra le montagne e la natura, la tradizione incontra l&apos;autenticità dei sapori locali.
+                        Nel cuore di un piccolo borgo immerso tra le montagne e la natura, la tradizione incontra l'autenticità dei sapori locali.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <a href="tel:+393491061911" className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 shadow-lg text-center transform hover:-translate-y-0.5">
@@ -206,7 +217,7 @@ export default function AppHomePageContent() {
                             Benvenuti a I Fortunelli
                         </h2>
                         <p className="text-stone-600 leading-relaxed mb-4 text-base md:text-lg">
-                            Nel cuore di Collegiove, tra il verde incontaminato delle montagne e l&apos;atmosfera autentica di un piccolo borgo, nasce uno spazio che è un po&apos; casa e un po&apos; tradizione.
+                            Nel cuore di Collegiove, tra il verde incontaminato delle montagne e l'atmosfera autentica di un piccolo borgo, nasce uno spazio che è un po' casa e un po' tradizione.
                         </p>
                         <p className="text-stone-600 leading-relaxed mb-6 text-base md:text-lg">
                             Siamo Bar, Trattoria, Bottega alimentare e Tabacchi: il punto di ritrovo ideale per chiunque voglia riscoprire i sapori di una volta.
@@ -267,11 +278,11 @@ export default function AppHomePageContent() {
                                     src={post.media_url}
                                     alt={post.caption}
                                     fill
-                                    sizes="(max-w-640px) 100vw, (max-w-1024px) 50vw, 25vw"
+                                    sizes="(max-w-640px) 50vw, (max-w-1024px) 25vw, 12.5vw"
                                     className="object-cover transition duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-stone-950/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 px-6">
-                                    <p className="text-white text-center text-sm md:text-base font-medium line-clamp-3">{post.caption}</p>
+                                    <p className="text-white text-center text-sm font-medium line-clamp-3">{post.caption}</p>
                                 </div>
                             </a>
                         ))}
@@ -319,10 +330,10 @@ export default function AppHomePageContent() {
                                     <span className="mr-2">📍</span> Posizione e Contatti:
                                 </h3>
                                 <p className="text-stone-700 text-base mb-1 font-medium">Bar Trattoria I Fortunelli</p>
-                                <p className="text-stone-600 text-base mb-4">Via Roma 112, 02020 Collegiove (RI)</p>
+                                <p className="text-stone-600 text-base mb-4">Via Umberto I 135, 02020 Collegiove (RI)</p>
                                 <p className="text-stone-800 font-semibold pt-2 border-t border-stone-100">
-                                    Telefono: <a href="tel:+393332510720" className="text-emerald-700 hover:underline">+39 333 2510 720</a> <a
-                                        href="https://wa.me/393332510720"
+                                    Telefono: <a href="tel:+393491061911" className="text-emerald-700 hover:underline">+39 349 106 1911</a> <a
+                                        href="https://wa.me/393491061911"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="text-emerald-700 hover:text-emerald-500 transition-colors inline-flex items-center align-middle ml-2 text-xl"

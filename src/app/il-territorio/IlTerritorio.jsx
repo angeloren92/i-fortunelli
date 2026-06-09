@@ -33,7 +33,7 @@ const sezioniTerritorio = [
                 tip: "🏍️ 🚴 Bikers & Cyclists Welcome: Disponiamo di un ampio spazio esterno sicuro per parcheggiare moto e bici. Fermati da noi per ricaricare le borracce, una pausa caffè o un pranzo completo recupera-forze.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 1 0 0-6.75 3.375 3.375 0 0 0 0 6.75zM17.85 17.25a3.375 3.375 0 1 0 0-6.75 3.375 3.375 0 0 0 0 6.75z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75zM17.85 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
                     </svg>
                 ),
@@ -132,7 +132,7 @@ const sezioniTerritorio = [
                 id: "infiorata",
                 title: "Infiorata del Corpus Domini",
                 short: "Gli storici vicoli coperti da disegni.",
-                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una tradizione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
+                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una traditione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
                 tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i tappeti floreali intatti e profumatissimi prima della processione, per poi fermarti a pranzo da noi.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -218,17 +218,25 @@ export default function IlTerritorio() {
                             </div>
 
                             {/* Griglia delle Card */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
                                 {sezione.cards.map((item) => {
                                     const isExpanded = activeId === item.id;
                                     const currentSlide = caroselloIndexes[item.id] || 0;
 
                                     return (
-                                        <button
+                                        /* CAMBIATO DA <button> A <div> CON ACCESSORIALITÀ SEMANTICA COMPLETA */
+                                        <div
                                             key={item.id}
                                             onClick={() => toggleAccordion(item.id)}
-                                            type="button"
-                                            className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none ${isExpanded
+                                            onKeyDown={(e) => {
+                                                if (e.key === "Enter" || e.key === " ") {
+                                                    e.preventDefault();
+                                                    toggleAccordion(item.id);
+                                                }
+                                            }}
+                                            role="button"
+                                            tabIndex={0}
+                                            className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none cursor-pointer ${isExpanded
                                                     ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
                                                     : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
                                                 }`}
@@ -265,12 +273,11 @@ export default function IlTerritorio() {
                                                                 
                                                                 /* --- INTERFACCIA CAROSELLO CON TAG IMAGE --- */
                                                                 <div 
-                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y"
+                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
                                                                     onClick={(e) => e.stopPropagation()}
                                                                     onTouchStart={handleTouchStart}
                                                                     onTouchEnd={(e) => handleTouchEnd(e, item.id, item.media.length)}
                                                                 >
-                                                                    {/* Utilizzo del tag <Image> con impostazione di riempimento responsivo (fill) */}
                                                                     <Image
                                                                         src={item.media[currentSlide]}
                                                                         alt={`${item.title} slide ${currentSlide + 1}`}
@@ -284,7 +291,7 @@ export default function IlTerritorio() {
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
-                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex"
+                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
                                                                             >
                                                                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -293,13 +300,13 @@ export default function IlTerritorio() {
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
-                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex"
+                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
                                                                             >
                                                                                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                                                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                                                                 </svg>
                                                                             </button>
-                                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs">
+                                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
                                                                                 {item.media.map((_, idx) => (
                                                                                     <span
                                                                                         key={idx}
@@ -313,9 +320,9 @@ export default function IlTerritorio() {
                                                                     )}
                                                                 </div>
                                                             ) : (
-                                                                /* --- INTERFACCIA PLAYER VIDEO 1/1 (Inalterata, i video usano tag HTML5 nativo) --- */
+                                                                /* --- INTERFACCIA PLAYER VIDEO 1/1 (Lecito all'interno di un div) --- */
                                                                 <div 
-                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black"
+                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black cursor-default"
                                                                     onClick={(e) => e.stopPropagation()}
                                                                 >
                                                                     <video
@@ -336,7 +343,7 @@ export default function IlTerritorio() {
                                                     </p>
                                                 </div>
                                             </div>
-                                        </button>
+                                        </div>
                                     );
                                 })}
                             </div>

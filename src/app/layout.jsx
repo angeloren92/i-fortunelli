@@ -14,8 +14,6 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
-
-
 // Script to force a page reload when navigating via back/forward browser buttons (bfcache)
 const bfcacheRecoveryScript = `
 (function () {
@@ -41,7 +39,12 @@ const bfcacheRecoveryScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" className={`${inter.variable} ${playfairDisplay.variable}`} suppressHydrationWarning>
+    <html 
+      lang="it" 
+      className={`${inter.variable} ${playfairDisplay.variable}`} 
+      suppressHydrationWarning
+      data-scroll-behavior="smooth" // <-- AGGIUNTO QUI per silenziare il warning di Next.js
+    >
       <head>
         {/* Inject scripts to browser navigation recovery */}
         <script dangerouslySetInnerHTML={{ __html: bfcacheRecoveryScript }} />
