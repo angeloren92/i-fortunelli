@@ -88,16 +88,7 @@ export default function AppHomePageContent() {
     //Array with services
     const servizi = [
         {
-            label: "Accesso Disabili",
-            icon: (
-                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.05 4.575a1.575 1.575 0 1 1-3.15 0 1.575 1.575 0 0 1 3.15 0ZM6 10.5h3v4.5H6.75A.75.75 0 0 0 6 15.75v3.75a.75.75 0 0 0 .75.75h2.25M13.5 10.5H21v1.5h-5.25v7.5h-1.5V12h-3v7.5h-1.5V10.5Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.75a3 3 0 0 0-3-3H6.75a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3h4.5a3 3 0 0 0 3-3v-7.5Z" />
-                </svg>
-            )
-        },
-        {
-            label: "Servizio Tabacchi",
+            label: "Tabacchi",
             icon: (
                 <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.008m0 2.25v.008m0 2.25v.008M12 18a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
@@ -114,7 +105,16 @@ export default function AppHomePageContent() {
             )
         },
         {
-            label: "Ampio Parcheggio",
+            label: "Accesso Disabili",
+            icon: (
+                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M10.05 4.575a1.575 1.575 0 1 1-3.15 0 1.575 1.575 0 0 1 3.15 0ZM6 10.5h3v4.5H6.75A.75.75 0 0 0 6 15.75v3.75a.75.75 0 0 0 .75.75h2.25M13.5 10.5H21v1.5h-5.25v7.5h-1.5V12h-3v7.5h-1.5V10.5Z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14.25 6.75a3 3 0 0 0-3-3H6.75a3 3 0 0 0-3 3v7.5a3 3 0 0 0 3 3h4.5a3 3 0 0 0 3-3v-7.5Z" />
+                </svg>
+            )
+        },
+        {
+            label: "Parcheggio",
             icon: (
                 <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h7.5m3 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.5m-16.5-3h16.5M3 12h18M3.104 15.75L4.5 12h15l1.396 3.75H3.104Z" />
@@ -153,8 +153,8 @@ export default function AppHomePageContent() {
                         {/* Original track block - Sostituito con Next.js Image e box ad aspect ratio fisso */}
                         <div className="flex items-center h-full animate-infinite-scroll">
                             {heroImages.map((item, index) => (
-                                <div 
-                                    key={`hero-orig-${index}`} 
+                                <div
+                                    key={`hero-orig-${index}`}
                                     className="relative h-full min-h-[85vh] aspect-[4/3] flex-shrink-0 shadow-md"
                                 >
                                     <Image
@@ -171,8 +171,8 @@ export default function AppHomePageContent() {
                         {/* Duplicated track block to guarantee loop continuity */}
                         <div className="flex items-center h-full animate-infinite-scroll" aria-hidden="true">
                             {heroImages.map((item, index) => (
-                                <div 
-                                    key={`hero-dup-${index}`} 
+                                <div
+                                    key={`hero-dup-${index}`}
                                     className="relative h-full min-h-[85vh] aspect-[4/3] flex-shrink-0 shadow-md"
                                 >
                                     <Image
@@ -245,7 +245,7 @@ export default function AppHomePageContent() {
                     <div className="lg:w-1/2 w-full">
                         <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
-                                src="/foto.png"
+                                src="/bar.png"
                                 alt="Interno caratteristico del Bar Trattoria I Fortunelli"
                                 fill
                                 sizes="(max-w-768px) 100vw, 50vw"

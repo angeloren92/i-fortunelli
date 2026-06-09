@@ -107,7 +107,7 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
                     </svg>
                 ),
-                media: ["/territorio/centro1.png","/territorio/centro2.jpeg"]
+                media: ["/territorio/centro1.png", "/territorio/centro2.jpeg"]
             }
         ]
     },
@@ -186,183 +186,190 @@ export default function IlTerritorio() {
     };
 
     return (
-        <section className="bg-stone-50 py-10 sm:py-20 border-t border-stone-200">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        /* 1. AGGIUNTA CLASSE RELATIVE E MIN-H-SCREEN PER PREPARARE L'OVERLAY SULLO SFONDO HTML */
+        <main className="relative w-full min-h-screen bg-[url('/territorio/bgterritorio.jpeg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
+            
+            {/* 2. IL VELO OTTICO: Sfondo chiaro ad alta opacità (90%) con sfocatura per esaltare il contrasto del testo scuro */}
+            <div className="absolute inset-0 bg-stone-50/90" />
 
-                {/* INTRO HEADER */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
-                        Guida Locale
-                    </span>
-                    <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
-                        Vivi e Scopri Collegiove
-                    </h2>
-                    <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
-                    </p>
-                </div>
+            {/* 3. CONTENITORE SOLLEVATO: relative z-10 stacca visivamente il layout operativo portandolo sopra al velo */}
+            <section className="relative z-10 w-full py-5 sm:py-10 my-5 md:my-10 bg-transparent border-t border-stone-200/50">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                {/* BLOCCHI DI CATEGORIA ITERATI */}
-                <div className="space-y-16">
-                    {sezioniTerritorio.map((sezione) => (
-                        <div key={sezione.id}>
+                    {/* INTRO HEADER */}
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
+                            Guida Locale
+                        </span>
+                        <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
+                            Vivi e Scopri Collegiove
+                        </h2>
+                        <p className="mt-3 text-stone-600 text-base sm:text-lg">
+                            Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
+                        </p>
+                    </div>
 
-                            {/* Titolo Categoria */}
-                            <div className="mb-8 border-b border-stone-200/80 pb-4">
-                                <h3 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
-                                    {sezione.categoriaTitolo}
-                                </h3>
-                                <p className="text-sm text-stone-500 mt-1">
-                                    {sezione.categoriaDescrizione}
-                                </p>
-                            </div>
+                    {/* BLOCCHI DI CATEGORIA ITERATI */}
+                    <div className="space-y-16">
+                        {sezioniTerritorio.map((sezione) => (
+                            <div key={sezione.id}>
 
-                            {/* Griglia delle Card */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-                                {sezione.cards.map((item) => {
-                                    const isExpanded = activeId === item.id;
-                                    const currentSlide = caroselloIndexes[item.id] || 0;
+                                {/* Titolo Categoria */}
+                                <div className="mb-8 border-b border-stone-200/80 pb-4">
+                                    <h3 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
+                                        {sezione.categoriaTitolo}
+                                    </h3>
+                                    <p className="text-sm text-stone-500 mt-1">
+                                        {sezione.categoriaDescrizione}
+                                    </p>
+                                </div>
 
-                                    return (
-                                        /* CAMBIATO DA <button> A <div> CON ACCESSORIALITÀ SEMANTICA COMPLETA */
-                                        <div
-                                            key={item.id}
-                                            onClick={() => toggleAccordion(item.id)}
-                                            onKeyDown={(e) => {
-                                                if (e.key === "Enter" || e.key === " ") {
-                                                    e.preventDefault();
-                                                    toggleAccordion(item.id);
-                                                }
-                                            }}
-                                            role="button"
-                                            tabIndex={0}
-                                            className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none cursor-pointer ${isExpanded
-                                                    ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
-                                                    : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
-                                                }`}
-                                        >
-                                            <div className="flex justify-between items-start mb-4">
-                                                <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
-                                                    {item.icon}
+                                {/* Griglia delle Card */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                                    {sezione.cards.map((item) => {
+                                        const isExpanded = activeId === item.id;
+                                        const currentSlide = caroselloIndexes[item.id] || 0;
+
+                                        return (
+                                            <div
+                                                key={item.id}
+                                                onClick={() => toggleAccordion(item.id)}
+                                                onKeyDown={(e) => {
+                                                    if (e.key === "Enter" || e.key === " ") {
+                                                        e.preventDefault();
+                                                        toggleAccordion(item.id);
+                                                    }
+                                                }}
+                                                role="button"
+                                                tabIndex={0}
+                                                className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none cursor-pointer ${isExpanded
+                                                        ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
+                                                        : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
+                                                    }`}
+                                            >
+                                                <div className="flex justify-between items-start mb-4">
+                                                    <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
+                                                        {item.icon}
+                                                    </div>
+                                                    <div className={`text-stone-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-amber-600' : 'group-hover:text-stone-600'}`}>
+                                                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                        </svg>
+                                                    </div>
                                                 </div>
-                                                <div className={`text-stone-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-amber-600' : 'group-hover:text-stone-600'}`}>
-                                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                                    </svg>
-                                                </div>
-                                            </div>
 
-                                            <h4 className={`text-lg font-bold mb-1 transition-colors ${isExpanded ? 'text-amber-800' : 'text-stone-900 group-hover:text-amber-700'}`}>
-                                                {item.title}
-                                            </h4>
-                                            <p className="text-sm text-stone-500 leading-relaxed">
-                                                {item.short}
-                                            </p>
+                                                <h4 className={`text-lg font-bold mb-1 transition-colors ${isExpanded ? 'text-amber-800' : 'text-stone-900 group-hover:text-amber-700'}`}>
+                                                    {item.title}
+                                                </h4>
+                                                <p className="text-sm text-stone-500 leading-relaxed">
+                                                    {item.short}
+                                                </p>
 
-                                            {/* Expandable Context Wrapper */}
-                                            <div className={`grid transition-all duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
-                                                <div className="overflow-hidden text-stone-700 text-sm space-y-3 border-t border-stone-100 pt-4">
-                                                    <p className="leading-relaxed">
-                                                        {item.details}
-                                                    </p>
+                                                {/* Expandable Context Wrapper */}
+                                                <div className={`grid transition-all duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
+                                                    <div className="overflow-hidden text-stone-700 text-sm space-y-3 border-t border-stone-100 pt-4">
+                                                        <p className="leading-relaxed">
+                                                            {item.details}
+                                                        </p>
 
-                                                    {/* SEZIONE MEDIA CON TAG IMAGE DI NEXT.JS (FORMATO 1/1) */}
-                                                    {item.media && (
-                                                        <div className="my-3">
-                                                            {Array.isArray(item.media) ? (
-                                                                
-                                                                /* --- INTERFACCIA CAROSELLO CON TAG IMAGE --- */
-                                                                <div 
-                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
-                                                                    onClick={(e) => e.stopPropagation()}
-                                                                    onTouchStart={handleTouchStart}
-                                                                    onTouchEnd={(e) => handleTouchEnd(e, item.id, item.media.length)}
-                                                                >
-                                                                    <Image
-                                                                        src={item.media[currentSlide]}
-                                                                        alt={`${item.title} slide ${currentSlide + 1}`}
-                                                                        fill
-                                                                        sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
-                                                                        className="object-cover transition-all duration-500 select-none pointer-events-none"
-                                                                    />
+                                                        {/* SEZIONE MEDIA CON TAG IMAGE DI NEXT.JS (FORMATO 1/1) */}
+                                                        {item.media && (
+                                                            <div className="my-3">
+                                                                {Array.isArray(item.media) ? (
                                                                     
-                                                                    {item.media.length > 1 && (
-                                                                        <>
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
-                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                                                                            >
-                                                                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                                                                                </svg>
-                                                                            </button>
-                                                                            <button
-                                                                                type="button"
-                                                                                onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
-                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                                                                            >
-                                                                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                                                </svg>
-                                                                            </button>
-                                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
-                                                                                {item.media.map((_, idx) => (
-                                                                                    <span
-                                                                                        key={idx}
-                                                                                        className={`block h-1.5 w-1.5 rounded-full transition-all ${
-                                                                                            currentSlide === idx ? 'bg-white w-3' : 'bg-white/50'
-                                                                                        }`}
-                                                                                    />
-                                                                                ))}
-                                                                            </div>
-                                                                        </>
-                                                                    )}
-                                                                </div>
-                                                            ) : (
-                                                                /* --- INTERFACCIA PLAYER VIDEO 1/1 (Lecito all'interno di un div) --- */
-                                                                <div 
-                                                                    className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black cursor-default"
-                                                                    onClick={(e) => e.stopPropagation()}
-                                                                >
-                                                                    <video
-                                                                        src={item.media}
-                                                                        controls
-                                                                        preload="metadata"
-                                                                        className="w-full h-full object-cover"
+                                                                    /* --- INTERFACCIA CAROSELLO CON TAG IMAGE --- */
+                                                                    <div 
+                                                                        className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
+                                                                        onClick={(e) => e.stopPropagation()}
+                                                                        onTouchStart={handleTouchStart}
+                                                                        onTouchEnd={(e) => handleTouchEnd(e, item.id, item.media.length)}
                                                                     >
-                                                                        Il tuo browser non supporta i video HTML5.
-                                                                    </video>
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    )}
+                                                                        <Image
+                                                                            src={item.media[currentSlide]}
+                                                                            alt={`${item.title} slide ${currentSlide + 1}`}
+                                                                            fill
+                                                                            sizes="(max-w-768px) 100vw, (max-w-1200px) 50vw, 33vw"
+                                                                            className="object-cover transition-all duration-500 select-none pointer-events-none"
+                                                                        />
+                                                                        
+                                                                        {item.media.length > 1 && (
+                                                                            <>
+                                                                                <button
+                                                                                    type="button"
+                                                                                    onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
+                                                                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                                                                                >
+                                                                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                                <button
+                                                                                    type="button"
+                                                                                    onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
+                                                                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                                                                                >
+                                                                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                                                    </svg>
+                                                                                </button>
+                                                                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
+                                                                                    {item.media.map((_, idx) => (
+                                                                                        <span
+                                                                                            key={idx}
+                                                                                            className={`block h-1.5 w-1.5 rounded-full transition-all ${
+                                                                                                currentSlide === idx ? 'bg-white w-3' : 'bg-white/50'
+                                                                                            }`}
+                                                                                        />
+                                                                                    ))}
+                                                                                </div>
+                                                                            </>
+                                                                        )}
+                                                                    </div>
+                                                                ) : (
+                                                                    /* --- INTERFACCIA PLAYER VIDEO 1/1 --- */
+                                                                    <div 
+                                                                        className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black cursor-default"
+                                                                        onClick={(e) => e.stopPropagation()}
+                                                                    >
+                                                                        <video
+                                                                            src={item.media}
+                                                                            controls
+                                                                            preload="metadata"
+                                                                            className="w-full h-full object-cover"
+                                                                        >
+                                                                            Il tuo browser non supporta i video HTML5.
+                                                                        </video>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        )}
 
-                                                    <p className="font-medium text-stone-900 bg-stone-50 p-3 rounded-xl border border-stone-100 leading-relaxed">
-                                                        {item.tip}
-                                                    </p>
+                                                        <p className="font-medium text-stone-900 bg-stone-50 p-3 rounded-xl border border-stone-100 leading-relaxed">
+                                                            {item.tip}
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    );
-                                })}
+                                        );
+                                    })}
+                                </div>
+
                             </div>
+                        ))}
+                    </div>
 
-                        </div>
-                    ))}
+                    {/* FOOTER CALL TO ACTION */}
+                    <div className="mt-16 text-center">
+                        <Link
+                            href="tel:+393491061911"
+                            className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
+                        >
+                            Chiama e Prenota un Tavolo per la tua Sosta
+                        </Link>
+                    </div>
+
                 </div>
-
-                {/* FOOTER CALL TO ACTION */}
-                <div className="mt-16 text-center">
-                    <Link
-                        href="tel:+393491061911"
-                        className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
-                    >
-                        Chiama e Prenota un Tavolo per la tua Sosta
-                    </Link>
-                </div>
-
-            </div>
-        </section>
+            </section>
+        </main>
     );
 }
