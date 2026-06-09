@@ -114,27 +114,10 @@ export default function AppHomePageContent() {
             )
         },
         {
-            label: "Parcheggio",
-            icon: (
-                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h7.5m3 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.5m-16.5-3h16.5M3 12h18M3.104 15.75L4.5 12h15l1.396 3.75H3.104Z" />
-                </svg>
-            )
-        },
-        {
             label: "Vicino alla Chiesa",
             icon: (
                 <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-                </svg>
-            )
-        },
-        {
-            label: "Vista Panoramica",
-            icon: (
-                <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 11.25V18m0 0l-2.25-2.25M12 18l2.25-2.25" />
                 </svg>
             )
         }
@@ -224,7 +207,7 @@ export default function AppHomePageContent() {
                         </p>
 
                         {/* NUOVA SEZIONE ICONE: Griglia di servizi locali */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-8 pt-6 border-t border-stone-200">
+                        <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-stone-200">
                             {servizi.map((servizio, index) => (
                                 <div
                                     key={index}
