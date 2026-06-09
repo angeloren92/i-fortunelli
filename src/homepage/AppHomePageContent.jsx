@@ -93,11 +93,11 @@ export default function AppHomePageContent() {
             <section className="relative w-full bg-stone-500 flex items-center justify-center min-h-[85dvh] overflow-hidden">
 
                 {/* Background Carousel track adjusted to match container height exactly */}
-                <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden md:py-3">
+                <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden">
                     <div className="w-full h-full inline-flex flex-nowrap [mask-image:_linear-gradient(to_right,transparent_0%,_black_15%,_black_85%,transparent_100%)]">
 
                         {/* Original track block - matching container height */}
-                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll md:gap-3 md:pr-3">
+                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll">
                             {heroImages.map((item, index) => (
                                 <img
                                     key={`hero-orig-${index}`}
@@ -109,7 +109,7 @@ export default function AppHomePageContent() {
                         </div>
 
                         {/* Duplicated track block to guarantee loop continuity */}
-                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll md:gap-3 md:pr-3" aria-hidden="true">
+                        <div className="flex items-center h-full [&_img]:max-w-none animate-infinite-scroll" aria-hidden="true">
                             {heroImages.map((item, index) => (
                                 <img
                                     key={`hero-dup-${index}`}
