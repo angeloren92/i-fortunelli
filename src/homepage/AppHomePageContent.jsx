@@ -246,7 +246,7 @@ export default function AppHomePageContent() {
                         <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
                                 src="/bar.png"
-                                alt="Interno caratteristico del Bar Trattoria I Fortunelli"
+                                alt="Bar Trattoria I Fortunelli"
                                 fill
                                 sizes="(max-w-768px) 100vw, 50vw"
                                 className="object-cover transition duration-500 group-hover:scale-102"

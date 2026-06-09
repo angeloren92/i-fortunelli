@@ -28,8 +28,8 @@ export default function LaNostraStoria() {
 
                         <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
-                                src="/foto.png"
-                                alt="Interno caratteristico del Bar Trattoria I Fortunelli"
+                                src="/la-nostra-storia/foto.png"
+                                alt="La nostra Famiglia"
                                 fill
                                 sizes="(max-w-768px) 100vw, 50vw"
                                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
