@@ -4,6 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
+// 1. CONFIGURAZIONE DEI LINK DI NAVIGAZIONE (Sorgente unica dei dati)
+const menuLinks = [
+    { href: "/la-nostra-storia", label: "La Nostra Storia" },
+    { href: "/il-territorio", label: "Il Territorio" },
+    { href: "/dove-siamo", label: "Dove Siamo" },
+];
+
 /**
  * Header Component - Navigation bar for "I Fortunelli" Bar & Trattoria.
  * Implements a fully responsive layout with a static light theme and a dynamic mobile drawer menu.
@@ -37,17 +44,17 @@ export default function Header() {
                     </div>
                 </Link>
 
-                {/* DESKTOP NAVIGATION: Viewport-adaptive menu hidden on small mobile displays, active from medium breakpoints up */}
+                {/* 2. DESKTOP NAVIGATION: Iterazione dinamica dell'array di link */}
                 <nav className="hidden md:flex items-center gap-8 text-lg font-medium text-gray-700">
-                    <Link href="/i-piatti" className="transition-colors hover:text-amber-600">
-                        I Piatti
-                    </Link>
-                    <Link href="/la-nostra-storia" className="transition-colors hover:text-amber-600">
-                        La Nostra Storia
-                    </Link>
-                    <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
-                        Dove Siamo
-                    </Link>
+                    {menuLinks.map((link) => (
+                        <Link 
+                            key={link.href} 
+                            href={link.href} 
+                            className="transition-colors hover:text-amber-600"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
                 </nav>
 
                 {/* MOBILE NAVIGATION TRIGGER: Interactive hamburger toggle control button */}
@@ -57,7 +64,7 @@ export default function Header() {
                         type="button"
                         className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 focus:outline-none"
                         aria-controls="mobile-menu"
-                        aria-expanded="false"
+                        aria-expanded={isOpen}
                     >
                         <span className="sr-only">Apri menu principale</span>
                         {isOpen ? (
@@ -75,19 +82,20 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* MOBILE DROPDOWN MENU: Conditionally mounted navigation panel utilizing CSS fade animation utilities */}
+            {/* 3. MOBILE DROPDOWN MENU: Iterazione dinamica dei medesimi link */}
             {isOpen && (
-                <div className="md:hidden border-t border-gray-100 bg-white px-4 py-4 animate-fade-in">
+                <div id="mobile-menu" className="md:hidden border-t border-gray-100 bg-white px-4 py-4 animate-fade-in">
                     <div className="flex flex-col gap-4 text-base font-medium text-gray-700">
-                        <Link href="/i-piatti" className="transition-colors hover:text-amber-600">
-                            I Piatti
-                        </Link>
-                        <Link href="/la-nostra-storia" className="transition-colors hover:text-amber-600">
-                            La Nostra Storia
-                        </Link>
-                        <Link href="/dove-siamo" className="transition-colors hover:text-amber-600">
-                            Dove Siamo
-                        </Link>
+                        {menuLinks.map((link) => (
+                            <Link 
+                                key={link.href} 
+                                href={link.href} 
+                                onClick={() => setIsOpen(false)} // UX Improvement: Chiude automaticamente il drawer al clic sul link
+                                className="transition-colors hover:text-amber-600"
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
                     </div>
                 </div>
             )}
