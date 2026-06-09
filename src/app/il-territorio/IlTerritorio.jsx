@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-// CONFIGURAZIONE STRUTTURATA DEL TERRITORIO (Sorgente unica divisa per Categorie)
+// CONFIGURAZIONE STRUTTURATA DEL TERRITORIO
 const sezioniTerritorio = [
     {
         id: "attivita",
@@ -20,7 +20,9 @@ const sezioniTerritorio = [
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h22.5m-22.5 0a9 9 0 1118 0 9 9 0 01-18 0z" />
                     </svg>
-                )
+                ),
+                // Array di immagini -> Attiva automaticamente il Carosello
+                media: ["/trk1.jpeg", "/trk2.jpeg", "/trk3.jpeg", "/trk4.jpeg", "/trk5.jpeg", "/trk6.jpeg", "/trk7.jpeg"]
             },
             {
                 id: "due-ruote",
@@ -33,27 +35,30 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75zM17.85 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
                     </svg>
-                )
+                ),
+                // Stringa singola video -> Attiva il Player Video
+                media: "/video.mp4"
             },
             {
                 id: "fotografia",
                 title: "Fotografia & Panorami",
                 short: "Scorci e tramonti da immortalare.",
-                details: "Collegiove offers punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
+                details: "Collegiove offre punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
                 tip: "📸 Luce perfetta: Chiedici quali sono i punti panoramici più nascosti ed esclusivi del borgo per scattare le tue foto prima di sederti a cena da noi!",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
                     </svg>
-                )
+                ),
+                media: "/fotografia.mp4"
             },
             {
                 id: "chiesa",
                 title: "La Chiesa del Borgo",
                 short: "Storia e cultura a pochi passi da noi.",
                 details: "A pochissimi minuti a piedi dalla trattoria si può raggiungere il nucleo storico del borgo e visitare la caratteristica chiesa locale, custode della memoria storica e spirituale della nostra piccola comunità di montagna.",
-                tip: "⛪ Un luogo di pace perfetto per scattare qualche fotografia panoramica e assaporare l'atmosfera autentica dei vecchi borghi italiani.",
+                tip: "⛪ Un luogo di pace perfetto per scattare qualche fotografia panoramica e assavorare l'atmosfera autentica dei vecchi borghi italiani.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
@@ -70,7 +75,7 @@ const sezioniTerritorio = [
             {
                 id: "pro-loco",
                 title: "Pro Loco Collegiove",
-                short: "Il punto di riferimento la storia del borgo.",
+                short: "Il motore culturale che anima il paese e valorizza le nostre tradizioni.",
                 details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
                 tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
                 icon: (
@@ -96,7 +101,7 @@ const sezioniTerritorio = [
                 id: "centro-anziani",
                 title: "Centro Anziani Collegiove",
                 short: "Il cuore della memoria storica.",
-                details: "Luogo di ritrovo fondamentale per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
+                details: "Luogo di ritrovo fundamental per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
                 tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani se custodiamo i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -127,7 +132,7 @@ const sezioniTerritorio = [
                 id: "infiorata",
                 title: "Infiorata del Corpus Domini",
                 short: "Gli storici vicoli coperti da disegni.",
-                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una tradizione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
+                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una tradizione spettacolare: le streets del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
                 tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i tappeti floreali intatti e profumatissimi prima della processione, per poi fermarti a pranzo da noi.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -140,17 +145,34 @@ const sezioniTerritorio = [
 ];
 
 export default function IlTerritorio() {
-    // State layout identifier tracking the single open accordion across categories
     const [activeId, setActiveId] = useState(null);
+    
+    // Stato per tracciare l'indice dell'immagine corrente di ogni singolo carosello (mappato sull'id della card)
+    const [caroselloIndexes, setCaroselloIndexes] = useState({});
 
     const toggleAccordion = (id) => {
         setActiveId(activeId === id ? null : id);
     };
 
+    // Funzione per scorrere le immagini del carosello
+    const handleNextSlide = (e, cardId, arrayLength) => {
+        e.stopPropagation(); // Previene la chiusura dell'accordion
+        const currentIndex = caroselloIndexes[cardId] || 0;
+        const nextIndex = currentIndex === arrayLength - 1 ? 0 : currentIndex + 1;
+        setCaroselloIndexes({ ...caroselloIndexes, [cardId]: nextIndex });
+    };
+
+    const handlePrevSlide = (e, cardId, arrayLength) => {
+        e.stopPropagation(); // Previene la chiusura dell'accordion
+        const currentIndex = caroselloIndexes[cardId] || 0;
+        const prevIndex = currentIndex === 0 ? arrayLength - 1 : currentIndex - 1;
+        setCaroselloIndexes({ ...caroselloIndexes, [cardId]: prevIndex });
+    };
+
     return (
         <section className="bg-stone-50 py-10 sm:py-20 border-t border-stone-200">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                
+
                 {/* INTRO HEADER */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
@@ -160,7 +182,7 @@ export default function IlTerritorio() {
                         Vivi e Scopri Collegiove
                     </h2>
                     <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
+                        Abbiamo diviso le meraviglie del nostro territory per aiutarti con la giornata nel borgo.
                     </p>
                 </div>
 
@@ -168,8 +190,8 @@ export default function IlTerritorio() {
                 <div className="space-y-16">
                     {sezioniTerritorio.map((sezione) => (
                         <div key={sezione.id}>
-                            
-                            {/* Titolo Introduttivo della Categoria */}
+
+                            {/* Titolo Categoria */}
                             <div className="mb-8 border-b border-stone-200/80 pb-4">
                                 <h3 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
                                     {sezione.categoriaTitolo}
@@ -179,23 +201,23 @@ export default function IlTerritorio() {
                                 </p>
                             </div>
 
-                            {/* Griglia delle Card dell'omonima categoria */}
+                            {/* Griglia delle Card */}
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
                                 {sezione.cards.map((item) => {
                                     const isExpanded = activeId === item.id;
-                                    
+                                    const currentSlide = caroselloIndexes[item.id] || 0;
+
                                     return (
                                         <button
                                             key={item.id}
                                             onClick={() => toggleAccordion(item.id)}
                                             type="button"
                                             className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none ${
-                                                isExpanded 
-                                                    ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20' 
+                                                isExpanded
+                                                    ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
                                                     : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
                                             }`}
                                         >
-                                            {/* Icon & Toggle Control State indicator */}
                                             <div className="flex justify-between items-start mb-4">
                                                 <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
                                                     {item.icon}
@@ -207,7 +229,6 @@ export default function IlTerritorio() {
                                                 </div>
                                             </div>
 
-                                            {/* Title & Short Description */}
                                             <h4 className={`text-lg font-bold mb-1 transition-colors ${isExpanded ? 'text-amber-800' : 'text-stone-900 group-hover:text-amber-700'}`}>
                                                 {item.title}
                                             </h4>
@@ -215,12 +236,83 @@ export default function IlTerritorio() {
                                                 {item.short}
                                             </p>
 
-                                            {/* Expandable Context Wrapper Container */}
+                                            {/* Expandable Context Wrapper */}
                                             <div className={`grid transition-all duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
                                                 <div className="overflow-hidden text-stone-700 text-sm space-y-3 border-t border-stone-100 pt-4">
                                                     <p className="leading-relaxed">
                                                         {item.details}
                                                     </p>
+
+                                                    {/* GESTIONE DINAMICA DEI MEDIA (ARRAY vs STRINGA) */}
+                                                    {item.media && (
+                                                        <div className="my-3">
+                                                            {Array.isArray(item.media) ? (
+                                                                /* --- INTERFACCIA CAROSELLO (IMMAGINI) --- */
+                                                                <div 
+                                                                    className="relative w-full aspect-video rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel"
+                                                                    onClick={(e) => e.stopPropagation()} // Blocca aperture involontarie sul contenitore
+                                                                >
+                                                                    <img
+                                                                        src={item.media[currentSlide]}
+                                                                        alt={`${item.title} slide ${currentSlide + 1}`}
+                                                                        className="w-full h-full object-cover transition-all duration-500 select-none"
+                                                                    />
+                                                                    
+                                                                    {item.media.length > 1 && (
+                                                                        <>
+                                                                            {/* Freccia Indietro */}
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
+                                                                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none"
+                                                                            >
+                                                                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            {/* Freccia Avanti */}
+                                                                            <button
+                                                                                type="button"
+                                                                                onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
+                                                                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none"
+                                                                            >
+                                                                                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                                                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                                                                                </svg>
+                                                                            </button>
+                                                                            {/* Indicatori a punti (Dots) */}
+                                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs">
+                                                                                {item.media.map((_, idx) => (
+                                                                                    <span
+                                                                                        key={idx}
+                                                                                        className={`block h-1.5 w-1.5 rounded-full transition-all ${
+                                                                                            currentSlide === idx ? 'bg-white w-3' : 'bg-white/50'
+                                                                                        }`}
+                                                                                    />
+                                                                                ))}
+                                                                            </div>
+                                                                        </>
+                                                                    )}
+                                                                </div>
+                                                            ) : (
+                                                                /* --- INTERFACCIA PLAYER (VIDEO SINGOLO) --- */
+                                                                <div 
+                                                                    className="relative w-full aspect-video rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black"
+                                                                    onClick={(e) => e.stopPropagation()}
+                                                                >
+                                                                    <video
+                                                                        src={item.media}
+                                                                        controls
+                                                                        preload="metadata"
+                                                                        className="w-full h-full object-cover"
+                                                                    >
+                                                                        Il tuo browser non supporta i video HTML5.
+                                                                    </video>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    )}
+
                                                     <p className="font-medium text-stone-900 bg-stone-50 p-3 rounded-xl border border-stone-100 leading-relaxed">
                                                         {item.tip}
                                                     </p>
@@ -237,7 +329,7 @@ export default function IlTerritorio() {
 
                 {/* FOOTER CALL TO ACTION */}
                 <div className="mt-16 text-center">
-                    <Link 
+                    <Link
                         href="tel:+393491061911"
                         className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
                     >
