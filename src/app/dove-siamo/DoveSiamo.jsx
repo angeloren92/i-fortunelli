@@ -14,9 +14,9 @@ export default function DoveSiamo() {
                     <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
                         Pianifica la tua visita
                     </span>
-                    <h1 className="font-serif text-4xl sm:text-5xl font-bold text-stone-900 tracking-tight">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
                         Raggiungi I Fortunelli
-                    </h1>
+                    </h2>
                     <p className="mt-4 text-lg text-stone-600 leading-relaxed">
                         Ci trovi all&apos;ingresso di Collegiove, pronti ad accoglierti dopo la tua escursione, il tuo giro in moto o per un pranzo della domenica in totale relax.
                     </p>

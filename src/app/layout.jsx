@@ -1,17 +1,17 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 import AppShell from "@/layout/AppShell";
 
-// Configure site fonts
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfairDisplay = Playfair_Display({
+  variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 
@@ -41,7 +41,7 @@ const bfcacheRecoveryScript = `
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="it" suppressHydrationWarning>
+    <html lang="it" className={`${inter.variable} ${playfairDisplay.variable}`} suppressHydrationWarning>
       <head>
         {/* Inject scripts to browser navigation recovery */}
         <script dangerouslySetInnerHTML={{ __html: bfcacheRecoveryScript }} />

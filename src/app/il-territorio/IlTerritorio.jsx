@@ -25,7 +25,7 @@ const sezioniTerritorio = [
             {
                 id: "due-ruote",
                 title: "Due Ruote (Moto & Ciclismo)",
-                short: "Il tra sterrati, curve e tornanti.",
+                short: "Tra sterrati, curve e tornanti.",
                 details: "Che tu preferisca il rombo del motore tra i tornanti panoramici che costeggiano i laghi o la sfida silenziosa delle pendenze in sella a una bici da corsa o mountain bike, le nostre strade offrono percorsi suggestivi immersi nel silenzio.",
                 tip: "🏍️ 🚴 Bikers & Cyclists Welcome: Disponiamo di un ampio spazio esterno sicuro per parcheggiare moto e bici. Fermati da noi per ricaricare le borracce, una pausa caffè o un pranzo completo recupera-forze.",
                 icon: (
@@ -156,11 +156,11 @@ export default function IlTerritorio() {
                     <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
                         Guida Locale
                     </span>
-                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
+                    <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
                         Vivi e Scopri Collegiove
                     </h2>
                     <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti a pianificare la giornata perfetta nel borgo.
+                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti a pianificare la giornata nel borgo.
                     </p>
                 </div>
 
@@ -171,7 +171,7 @@ export default function IlTerritorio() {
                             
                             {/* Titolo Introduttivo della Categoria */}
                             <div className="mb-8 border-b border-stone-200/80 pb-4">
-                                <h3 className="font-serif text-2xl font-bold text-stone-900 flex items-center gap-2">
+                                <h3 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
                                     {sezione.categoriaTitolo}
                                 </h3>
                                 <p className="text-sm text-stone-500 mt-1">
@@ -208,7 +208,7 @@ export default function IlTerritorio() {
                                             </div>
 
                                             {/* Title & Short Description */}
-                                            <h4 className={`font-serif text-lg font-bold mb-1 transition-colors ${isExpanded ? 'text-amber-800' : 'text-stone-900 group-hover:text-amber-700'}`}>
+                                            <h4 className={`text-lg font-bold mb-1 transition-colors ${isExpanded ? 'text-amber-800' : 'text-stone-900 group-hover:text-amber-700'}`}>
                                                 {item.title}
                                             </h4>
                                             <p className="text-sm text-stone-500 leading-relaxed">

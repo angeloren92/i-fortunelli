@@ -10,9 +10,9 @@ export default function LaNostraStoria() {
                         <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
                             Benvenuti a tavola
                         </span>
-                        <h1 className="font-serif text-4xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-6">
+                        <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-6">
                             La Nostra Storia
-                        </h1>
+                        </h2>
                         <div className="space-y-4 text-base text-stone-700 leading-relaxed">
                             <p>
                                 La <strong>Trattoria Bar I Fortunelli</strong> nasce dal desiderio di custodire e tramandare i sapori autentici della nostra terra, portando in tavola l'antica tradizione culinaria locale in un'atmosfera calda, familiare e accogliente.
