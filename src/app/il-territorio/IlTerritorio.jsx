@@ -23,7 +23,7 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h22.5m-22.5 0a9 9 0 1118 0 9 9 0 01-18 0z" />
                     </svg>
                 ),
-                media: ["/trk1.jpeg", "/trk2.jpeg", "/trk3.jpeg", "/trk4.jpeg", "/trk5.jpeg", "/trk6.jpeg", "/trk7.jpeg"]
+                media: ["/territorio/trk1.jpeg", "/territorio/trk2.jpeg", "/territorio/trk3.jpeg", "/territorio/trk4.jpeg", "/territorio/trk5.jpeg", "/territorio/trk6.jpeg", "/territorio/trk7.jpeg"]
             },
             {
                 id: "due-ruote",
@@ -37,7 +37,7 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
                     </svg>
                 ),
-                media: "/video.mp4"
+                media: "territorio/video.mp4"
             },
             {
                 id: "fotografia",
@@ -48,10 +48,9 @@ const sezioniTerritorio = [
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" />
                     </svg>
                 ),
-                media: "/fotografia.mp4"
+                media: "/territorio/fotografia.mp4"
             },
             {
                 id: "chiesa",
@@ -75,7 +74,7 @@ const sezioniTerritorio = [
             {
                 id: "pro-loco",
                 title: "Pro Loco Collegiove",
-                short: "Il motore culturale che anima il paese e valorizza le nostre tradizioni.",
+                short: "Il motore delle nostre tradizioni.",
                 details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
                 tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
                 icon: (
@@ -107,7 +106,8 @@ const sezioniTerritorio = [
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
                     </svg>
-                )
+                ),
+                media: ["/territorio/centro1.png","/territorio/centro2.jpeg"]
             }
         ]
     },
@@ -218,7 +218,7 @@ export default function IlTerritorio() {
                             </div>
 
                             {/* Griglia delle Card */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                                 {sezione.cards.map((item) => {
                                     const isExpanded = activeId === item.id;
                                     const currentSlide = caroselloIndexes[item.id] || 0;
