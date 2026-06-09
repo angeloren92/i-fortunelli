@@ -160,7 +160,7 @@ export default function IlTerritorio() {
                         Vivi e Scopri Collegiove
                     </h2>
                     <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti a pianificare la giornata nel borgo.
+                        Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
                     </p>
                 </div>
 
