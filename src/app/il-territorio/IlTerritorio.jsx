@@ -1,12 +1,15 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-// Importiamo il componente Image ottimizzato di Next.js
 import Image from "next/image";
 
-// CONFIGURAZIONE STRUTTURATA DEL TERRITORIO
-const sezioniTerritorio = [
+/**
+ * ============================================================
+ * CONFIGURAZIONE DATI (Spostata fuori per performance)
+ * ============================================================
+ */
+const sezioniTerritorioConfig = [
     {
         id: "attivita",
         categoriaTitolo: "Attività sul Territorio",
@@ -37,7 +40,7 @@ const sezioniTerritorio = [
                         <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
                     </svg>
                 ),
-                media: "territorio/video.mp4"
+                media: "/territorio/video.mp4"
             },
             {
                 id: "fotografia",
@@ -144,55 +147,151 @@ const sezioniTerritorio = [
     }
 ];
 
-export default function IlTerritorio() {
-    const [activeId, setActiveId] = useState(null);
-    const [caroselloIndexes, setCaroselloIndexes] = useState({});
+
+/**
+ * ============================================================
+ * COMPONENTE CAROSELLO OTTIMIZZATO (Auto-contenuto)
+ * ============================================================
+ */
+function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [touchStartX, setTouchStartX] = useState(0);
+    const length = images.length;
 
-    const toggleAccordion = (id) => {
-        setActiveId(activeId === id ? null : id);
-    };
-
-    const handleNextSlide = (e, cardId, arrayLength) => {
+    // Logica di Navigazione
+    const handleNext = (e) => {
         if (e) e.stopPropagation();
-        const currentIndex = caroselloIndexes[cardId] || 0;
-        const nextIndex = currentIndex === arrayLength - 1 ? 0 : currentIndex + 1;
-        setCaroselloIndexes({ ...caroselloIndexes, [cardId]: nextIndex });
+        setCurrentIndex((prev) => (prev === length - 1 ? 0 : prev + 1));
     };
 
-    const handlePrevSlide = (e, cardId, arrayLength) => {
+    const handlePrev = (e) => {
         if (e) e.stopPropagation();
-        const currentIndex = caroselloIndexes[cardId] || 0;
-        const prevIndex = currentIndex === 0 ? arrayLength - 1 : currentIndex - 1;
-        setCaroselloIndexes({ ...caroselloIndexes, [cardId]: prevIndex });
+        setCurrentIndex((prev) => (prev === 0 ? length - 1 : prev - 1));
     };
 
-    const handleTouchStart = (e) => {
+    // Gestione Touch
+    const onTouchStart = (e) => {
         e.stopPropagation();
         setTouchStartX(e.targetTouches[0].clientX);
     };
 
-    const handleTouchEnd = (e, cardId, arrayLength) => {
+    const onTouchEnd = (e) => {
         e.stopPropagation();
         const touchEndX = e.changedTouches[0].clientX;
         const diff = touchStartX - touchEndX;
         const threshold = 50;
 
         if (diff > threshold) {
-            handleNextSlide(null, cardId, arrayLength);
+            handleNext();
         } else if (diff < -threshold) {
-            handlePrevSlide(null, cardId, arrayLength);
+            handlePrev();
         }
     };
 
+    /**
+     * ============================================================
+     * PRELOADING LOGIC (Cruciale per la fluidità dello scorrimento)
+ * Questo effetto renderizza copie invisibili delle immagini adiacenti.
+ * Il browser le scarica e le mette in cache *prima* che l'utente scorra.
+ * Risultato: scorrimento istantaneo, senza 'bianchi' o attese.
+     * ============================================================
+     */
+    useEffect(() => {
+        if (length < 2) return;
+
+        const nextIndex = (currentIndex + 1) % length;
+        const prevIndex = (currentIndex - 1 + length) % length;
+
+        // Creiamo elementi Image invisibili per forzare il fetch del browser
+        const preloadImages = [images[nextIndex], images[prevIndex]];
+        preloadImages.forEach(src => {
+            const img = new window.Image();
+            img.src = src;
+        });
+
+    }, [currentIndex, images, length]);
+
     return (
-        /* 1. AGGIUNTA CLASSE RELATIVE E MIN-H-SCREEN PER PREPARARE L'OVERLAY SULLO SFONDO HTML */
+        /* --- Contenitore Carosello con Formato 1/1 --- */
+        <div 
+            className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+        >
+            <Image
+                src={images[currentIndex]}
+                alt={`${altTextBase} slide ${currentIndex + 1}`}
+                fill
+                // Proprietà priority applicata solo alla PRIMISSIMA immagine del PRIMISSIMO carosello sopra il fold
+                priority={priorityLoad && currentIndex === 0}
+                // SIZES OTTIMIZZATO basato sul layout a griglia: mobile full width, tablet+ 50% width.
+                // Questo evita di scaricare immagini a risoluzione 4K per un riquadro piccolo.
+                sizes="(max-w: 768px) 100vw, (max-w: 1280px) 50vw, 640px"
+                className="object-cover transition-all duration-500 select-none pointer-events-none"
+            />
+            
+            {/* Controlli di Navigazione (visibili solo se più di 1 immagine) */}
+            {length > 1 && (
+                <>
+                    <button
+                        type="button"
+                        onClick={handlePrev}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        aria-label="Immagine precedente"
+                    >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={handleNext}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        aria-label="Immagine successiva"
+                    >
+                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    {/* Indicatori a Punti */}
+                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
+                        {images.map((_, idx) => (
+                            <span
+                                key={idx}
+                                className={`block h-1.5 w-1.5 rounded-full transition-all ${
+                                    currentIndex === idx ? 'bg-white w-3' : 'bg-white/50'
+                                }`}
+                            />
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
+    );
+}
+
+
+/**
+ * ============================================================
+ * COMPONENTE PAGINA PRINCIPALE
+ * ============================================================
+ */
+export default function IlTerritorio() {
+    const [activeId, setActiveId] = useState(null);
+
+    const toggleAccordion = (id) => {
+        setActiveId(activeId === id ? null : id);
+    };
+
+    return (
         <main className="relative w-full min-h-screen bg-[url('/territorio/bgterritorio.jpeg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
             
-            {/* 2. IL VELO OTTICO: Sfondo chiaro ad alta opacità (90%) con sfocatura per esaltare il contrasto del testo scuro */}
+            {/* Il velo ottico di sfondo */}
             <div className="absolute inset-0 bg-stone-50/90" />
 
-            {/* 3. CONTENITORE SOLLEVATO: relative z-10 stacca visivamente il layout operativo portandolo sopra al velo */}
+            {/* Contenitore principale sollevato */}
             <section className="relative z-10 w-full py-5 sm:py-10 my-5 md:my-10 bg-transparent border-t border-stone-200/50">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
@@ -211,7 +310,7 @@ export default function IlTerritorio() {
 
                     {/* BLOCCHI DI CATEGORIA ITERATI */}
                     <div className="space-y-16">
-                        {sezioniTerritorio.map((sezione) => (
+                        {sezioniTerritorioConfig.map((sezione, sectionIndex) => (
                             <div key={sezione.id}>
 
                                 {/* Titolo Categoria */}
@@ -226,9 +325,11 @@ export default function IlTerritorio() {
 
                                 {/* Griglia delle Card */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                                    {sezione.cards.map((item) => {
+                                    {sezione.cards.map((item, cardIndex) => {
                                         const isExpanded = activeId === item.id;
-                                        const currentSlide = caroselloIndexes[item.id] || 0;
+                                        
+                                        // Determiniamo se questo è il PRIMISSIMO elemento visibile (per la priority)
+                                        const isFirstVisualElement = sectionIndex === 0 && cardIndex === 0;
 
                                         return (
                                             <div
@@ -242,6 +343,7 @@ export default function IlTerritorio() {
                                                 }}
                                                 role="button"
                                                 tabIndex={0}
+                                                aria-expanded={isExpanded}
                                                 className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none cursor-pointer ${isExpanded
                                                         ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
                                                         : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
@@ -276,55 +378,13 @@ export default function IlTerritorio() {
                                                         {item.media && (
                                                             <div className="my-3">
                                                                 {Array.isArray(item.media) ? (
-                                                                    
-                                                                    /* --- INTERFACCIA CAROSELLO CON TAG IMAGE --- */
-                                                                    <div 
-                                                                        className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
-                                                                        onClick={(e) => e.stopPropagation()}
-                                                                        onTouchStart={handleTouchStart}
-                                                                        onTouchEnd={(e) => handleTouchEnd(e, item.id, item.media.length)}
-                                                                    >
-                                                                        <Image
-                                                                            src={item.media[currentSlide]}
-                                                                            alt={`${item.title} slide ${currentSlide + 1}`}
-                                                                            fill
-                                                                            sizes="(max-w-1024px) 100vw, (max-w-1200px) 100vw, 100vw"
-                                                                            className="object-cover transition-all duration-500 select-none pointer-events-none"
-                                                                        />
-                                                                        
-                                                                        {item.media.length > 1 && (
-                                                                            <>
-                                                                                <button
-                                                                                    type="button"
-                                                                                    onClick={(e) => handlePrevSlide(e, item.id, item.media.length)}
-                                                                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                                                                                >
-                                                                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                                                                                    </svg>
-                                                                                </button>
-                                                                                <button
-                                                                                    type="button"
-                                                                                    onClick={(e) => handleNextSlide(e, item.id, item.media.length)}
-                                                                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                                                                                >
-                                                                                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                                                                                    </svg>
-                                                                                </button>
-                                                                                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
-                                                                                    {item.media.map((_, idx) => (
-                                                                                        <span
-                                                                                            key={idx}
-                                                                                            className={`block h-1.5 w-1.5 rounded-full transition-all ${
-                                                                                                currentSlide === idx ? 'bg-white w-3' : 'bg-white/50'
-                                                                                            }`}
-                                                                                        />
-                                                                                    ))}
-                                                                                </div>
-                                                                            </>
-                                                                        )}
-                                                                    </div>
+                                                                    /* --- INTERFACCIA CAROSELLO OTTIMIZZATO --- */
+                                                                    <CarouselOttimizzato 
+                                                                        images={item.media} 
+                                                                        altTextBase={item.title}
+                                                                        // Passiamo la flag per caricare con priority se sopra il fold
+                                                                        priorityLoad={isFirstVisualElement}
+                                                                    />
                                                                 ) : (
                                                                     /* --- INTERFACCIA PLAYER VIDEO 1/1 --- */
                                                                     <div 
