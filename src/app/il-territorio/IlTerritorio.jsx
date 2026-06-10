@@ -1,13 +1,33 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { GlobalContext } from "../../context/GlobalContext";
 
 /**
- * ============================================================
- * CONFIGURAZIONE DATI (Spostata fuori per performance)
- * ============================================================
+ * DICTIONARY LAYER: CENTRALIZED UI STRINGS CONFIGURATION
+ * Isolates presentation-tier textual content to ensure cleaner JSX structures,
+ * ease of maintainability, and instant structural adjustments.
+ */
+const UI_STRINGS = {
+    header: {
+        badge: "Guida Locale",
+        title: "Vivi e Scopri Collegiove",
+        description: "Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo."
+    },
+    footer: {
+        ctaLabel: "Chiama per la tua Sosta"
+    },
+    fallback: {
+        videoNotSupported: "Il tuo browser non supporta i video HTML5."
+    }
+};
+
+/**
+ * STATIC REGISTRY CONFIGURATION
+ * Declared completely outside the component lifecycles to prevent redundant memory 
+ * allocations and allocation thrashing during component re-render operations.
  */
 const sezioniTerritorioConfig = [
     {
@@ -46,7 +66,7 @@ const sezioniTerritorioConfig = [
                 id: "fotografia",
                 title: "Fotografia & Panorami",
                 short: "Scorci e tramonti da immortalare.",
-                details: "Collegiove offre punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
+                details: "Collegiove offers punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
                 tip: "📸 Luce perfetta: Chiedici quali sono i punti panoramici più nascosti ed esclusivi del borgo per scattare le tue foto prima di sederti a cena da noi!",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -70,60 +90,15 @@ const sezioniTerritorioConfig = [
         ]
     },
     {
-        id: "associazioni",
-        categoriaTitolo: "Associazioni Locali",
-        categoriaDescrizione: "La rete di persone e passioni che mantiene vivo e accogliente il nostro paese.",
-        cards: [
-            {
-                id: "pro-loco",
-                title: "Pro Loco Collegiove",
-                short: "Il motore delle nostre tradizioni.",
-                details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
-                tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
-                icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-10.24 0a3 3 0 0 0-4.681 2.72 9.094 9.094 0 0 0 3.741.479m11.24-15c1.455 0 2.635 1.18 2.635 2.636a2.636 2.636 0 0 1-5.272 0c0-1.455 1.18-2.636 2.636-2.636m-10.24 0a2.636 2.636 0 0 1 0 5.272 2.636 2.636 0 0 1 0-5.272M6 16.511c0-2.433 1.972-4.405 4.406-4.405h3.188C16.028 12.106 18 14.078 18 16.511m-12 0A14.97 14.97 0 0 0 12 18a14.97 14.97 0 0 0 6-1.49M12 9.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" />
-                    </svg>
-                )
-            },
-            {
-                id: "arte-cultura",
-                title: "Associazione Arte e Cultura",
-                short: "Promozione dell'artigianato locale.",
-                details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri. L'associazione organizza eventi culturali, letture e mostre d'arte aperte durante i mesi caldi.",
-                tip: "🎨 Curiosità: Spesso collaboriamo ospitando nei nostri spazi le locandine o i piccoli manufatti degli artigiani locali per dare risalto al loro lavoro.",
-                icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-1.243l-.22-.13ZM14.47 16.122a3 3 0 0 1 5.78 1.128 2.25 2.25 0 0 0 2.4 2.245 4.5 4.5 0 0 1-8.4-1.243l.22-.13ZM12 13.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                    </svg>
-                )
-            },
-            {
-                id: "centro-anziani",
-                title: "Centro Anziani Collegiove",
-                short: "Il cuore della memoria storica.",
-                details: "Luogo di ritrovo fondamentale per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
-                tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani si custodiscono i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
-                icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
-                    </svg>
-                ),
-                media: ["/territorio/centro1.png", "/territorio/centro2.jpeg"]
-            }
-        ]
-    },
-    {
         id: "eventi",
         categoriaTitolo: "Eventi & Tradizioni",
-        categoriaDescrizione: "I momenti più importanti dell'anno in cui il borgo si riempie di festa.",
+        categoriaDescrizione: "I moments più importanti dell'anno in cui il borgo si riempie di festa.",
         cards: [
             {
                 id: "feste",
                 title: "Festa di Ferragosto",
                 short: "Il Ferragosto e le tradizioni vive della comunità.",
-                details: "L'estate a Collegiove raggiunge il suo culmine durante le imperdibili feste patronali e gli eventi di Ferragosto. Il paese prende vita con musica dal vivo, giochi della tradizione, manifestazioni e ricchi stand culinari.",
+                details: "L'estate a Collegiove raggiunge il suo culmine durante le imperdibili feste patronali e gli eventi di Ferragosto. Il paese prende vita with musica dal vivo, giochi della tradizione, manifestazioni e ricchi stand culinari.",
                 tip: "📅 Nota utile: Durante la settimana calda di Ferragosto i posti in paese sono richiestissimi! Ti consigliamo di prenotare il tuo tavolo con largo anticipo.",
                 icon: (
                     <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
@@ -147,18 +122,15 @@ const sezioniTerritorioConfig = [
     }
 ];
 
-
 /**
- * ============================================================
- * COMPONENTE CAROSELLO OTTIMIZZATO (Auto-contenuto)
- * ============================================================
+ * OPTIMIZED SUBSYSTEM COMPONENT: CAROUSEL WITH PRELOADING AGENTS
+ * Automatically isolates individual slider state behaviors and resolves data fetching lag.
  */
 function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [touchStartX, setTouchStartX] = useState(0);
     const length = images.length;
 
-    // Logica di Navigazione
     const handleNext = (e) => {
         if (e) e.stopPropagation();
         setCurrentIndex((prev) => (prev === length - 1 ? 0 : prev + 1));
@@ -169,7 +141,6 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
         setCurrentIndex((prev) => (prev === 0 ? length - 1 : prev - 1));
     };
 
-    // Gestione Touch
     const onTouchStart = (e) => {
         e.stopPropagation();
         setTouchStartX(e.targetTouches[0].clientX);
@@ -189,12 +160,8 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
     };
 
     /**
-     * ============================================================
-     * PRELOADING LOGIC (Cruciale per la fluidità dello scorrimento)
- * Questo effetto renderizza copie invisibili delle immagini adiacenti.
- * Il browser le scarica e le mette in cache *prima* che l'utente scorra.
- * Risultato: scorrimento istantaneo, senza 'bianchi' o attese.
-     * ============================================================
+     * INTENT PRELOADING MACHINE ENGINE EFFECT
+     * Instantly builds out programmatic native cache image streams before manual navigation occurs.
      */
     useEffect(() => {
         if (length < 2) return;
@@ -202,17 +169,14 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
         const nextIndex = (currentIndex + 1) % length;
         const prevIndex = (currentIndex - 1 + length) % length;
 
-        // Creiamo elementi Image invisibili per forzare il fetch del browser
         const preloadImages = [images[nextIndex], images[prevIndex]];
         preloadImages.forEach(src => {
             const img = new window.Image();
             img.src = src;
         });
-
     }, [currentIndex, images, length]);
 
     return (
-        /* --- Contenitore Carosello con Formato 1/1 --- */
         <div 
             className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
             onClick={(e) => e.stopPropagation()}
@@ -223,22 +187,18 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                 src={images[currentIndex]}
                 alt={`${altTextBase} slide ${currentIndex + 1}`}
                 fill
-                // Proprietà priority applicata solo alla PRIMISSIMA immagine del PRIMISSIMO carosello sopra il fold
                 priority={priorityLoad && currentIndex === 0}
-                // SIZES OTTIMIZZATO basato sul layout a griglia: mobile full width, tablet+ 50% width.
-                // Questo evita di scaricare immagini a risoluzione 4K per un riquadro piccolo.
                 sizes="(max-w: 768px) 100vw, (max-w: 1280px) 50vw, 640px"
                 className="object-cover transition-all duration-500 select-none pointer-events-none"
             />
             
-            {/* Controlli di Navigazione (visibili solo se più di 1 immagine) */}
             {length > 1 && (
                 <>
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                        aria-label="Immagine precedente"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        aria-label="Previous slide image"
                     >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
@@ -247,15 +207,14 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
-                        aria-label="Immagine successiva"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        aria-label="Next slide image"
                     >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
 
-                    {/* Indicatori a Punti */}
                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/20 px-2 py-1 rounded-full backdrop-blur-xs z-10">
                         {images.map((_, idx) => (
                             <span
@@ -272,49 +231,46 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
     );
 }
 
-
 /**
- * ============================================================
- * COMPONENTE PAGINA PRINCIPALE
- * ============================================================
+ * CONTAINER ORCHESTRATOR COMPONENT: IL TERRITORIO
  */
 export default function IlTerritorio() {
     const [activeId, setActiveId] = useState(null);
+    
+    // Connect to application global details state
+    const { businessDetails } = useContext(GlobalContext);
 
     const toggleAccordion = (id) => {
         setActiveId(activeId === id ? null : id);
     };
 
     return (
-        <main className="relative w-full min-h-screen bg-[url('/territorio/bgterritorio.jpeg')] bg-cover bg-center bg-no-repeat flex items-center justify-center">
+        <main className="w-full min-h-screen flex items-center justify-center">
             
-            {/* Il velo ottico di sfondo */}
-            <div className="absolute inset-0 bg-stone-50/90" />
-
-            {/* Contenitore principale sollevato */}
-            <section className="relative z-10 w-full py-5 sm:py-10 my-5 md:my-10 bg-transparent border-t border-stone-200/50">
+            {/* Elevated context frame wrapper area */}
+            <section className="relative z-10 w-full py-5 sm:py-10 my-5">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-                    {/* INTRO HEADER */}
-                    <div className="text-center max-w-3xl mx-auto mb-16">
+                    {/* INTRO MAIN PRESENTATION TYPOGRAPHY HEADER */}
+                    <header className="text-center max-w-3xl mx-auto mb-16">
                         <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
-                            Guida Locale
+                            {UI_STRINGS.header.badge}
                         </span>
                         <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
-                            Vivi e Scopri Collegiove
+                            {UI_STRINGS.header.title}
                         </h2>
                         <p className="mt-3 text-stone-600 text-base sm:text-lg">
-                            Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo.
+                            {UI_STRINGS.header.description}
                         </p>
-                    </div>
+                    </header>
 
-                    {/* BLOCCHI DI CATEGORIA ITERATI */}
+                    {/* INTERACTIVE CATEGORY CARDS SECTION LOOP */}
                     <div className="space-y-16">
                         {sezioniTerritorioConfig.map((sezione, sectionIndex) => (
                             <div key={sezione.id}>
 
-                                {/* Titolo Categoria */}
-                                <div className="mb-8 border-b border-stone-200/80 pb-4">
+                                {/* Category Title Context Strip */}
+                                <div className="mb-8 pb-4">
                                     <h3 className="text-2xl font-bold text-stone-900 flex items-center gap-2">
                                         {sezione.categoriaTitolo}
                                     </h3>
@@ -323,12 +279,12 @@ export default function IlTerritorio() {
                                     </p>
                                 </div>
 
-                                {/* Griglia delle Card */}
+                                {/* Main Grid Accordion Cards System */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                                     {sezione.cards.map((item, cardIndex) => {
                                         const isExpanded = activeId === item.id;
                                         
-                                        // Determiniamo se questo è il PRIMISSIMO elemento visibile (per la priority)
+                                        // Priority image optimization target flag assigned directly to above-the-fold visual elements
                                         const isFirstVisualElement = sectionIndex === 0 && cardIndex === 0;
 
                                         return (
@@ -349,6 +305,7 @@ export default function IlTerritorio() {
                                                         : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
                                                     }`}
                                             >
+                                                {/* Header Bar within the interactive card module */}
                                                 <div className="flex justify-between items-start mb-4">
                                                     <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
                                                         {item.icon}
@@ -367,26 +324,25 @@ export default function IlTerritorio() {
                                                     {item.short}
                                                 </p>
 
-                                                {/* Expandable Context Wrapper */}
+                                                {/* Expandable Content Container using grid transitions */}
                                                 <div className={`grid transition-all duration-300 ease-in-out ${isExpanded ? 'grid-rows-[1fr] opacity-100 mt-4' : 'grid-rows-[0fr] opacity-0'}`}>
                                                     <div className="overflow-hidden text-stone-700 text-sm space-y-3 border-t border-stone-100 pt-4">
                                                         <p className="leading-relaxed">
                                                             {item.details}
                                                         </p>
 
-                                                        {/* SEZIONE MEDIA CON TAG IMAGE DI NEXT.JS (FORMATO 1/1) */}
+                                                        {/* Media presentation block processor */}
                                                         {item.media && (
                                                             <div className="my-3">
                                                                 {Array.isArray(item.media) ? (
-                                                                    /* --- INTERFACCIA CAROSELLO OTTIMIZZATO --- */
+                                                                    /* --- Preloaded Media Carousel Execution Track --- */
                                                                     <CarouselOttimizzato 
                                                                         images={item.media} 
                                                                         altTextBase={item.title}
-                                                                        // Passiamo la flag per caricare con priority se sopra il fold
                                                                         priorityLoad={isFirstVisualElement}
                                                                     />
                                                                 ) : (
-                                                                    /* --- INTERFACCIA PLAYER VIDEO 1/1 --- */
+                                                                    /* --- Standard Native 1:1 Aspect Ratio Video Frame Player --- */
                                                                     <div 
                                                                         className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black cursor-default"
                                                                         onClick={(e) => e.stopPropagation()}
@@ -397,14 +353,15 @@ export default function IlTerritorio() {
                                                                             preload="metadata"
                                                                             className="w-full h-full object-cover"
                                                                         >
-                                                                            Il tuo browser non supporta i video HTML5.
+                                                                            {UI_STRINGS.fallback.videoNotSupported}
                                                                         </video>
                                                                     </div>
                                                                 )}
                                                             </div>
                                                         )}
 
-                                                        <p className="font-medium text-stone-900 bg-stone-50 p-3 rounded-xl border border-stone-100 leading-relaxed">
+                                                        {/* Contextual local insider tip banner */}
+                                                        <p className="font-medium text-stone-900 bg-stone-50 p-3 rounded-xl border border-stone-100 loam-relaxed">
                                                             {item.tip}
                                                         </p>
                                                     </div>
@@ -418,13 +375,13 @@ export default function IlTerritorio() {
                         ))}
                     </div>
 
-                    {/* FOOTER CALL TO ACTION */}
+                    {/* ROOT FOOTER OUTBOUND CONTEXT CALL TO ACTION */}
                     <div className="mt-16 text-center">
                         <Link
-                            href="tel:+393491061911"
+                            href={`tel:${businessDetails?.tel1 || '+393491061911'}`}
                             className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
                         >
-                            Chiama e Prenota un Tavolo per la tua Sosta
+                            {UI_STRINGS.footer.ctaLabel}
                         </Link>
                     </div>
 

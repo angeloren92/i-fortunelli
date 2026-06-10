@@ -2,12 +2,53 @@
 
 import Image from 'next/image';
 import { FaWhatsapp } from "react-icons/fa";
+import { useContext } from "react";
+import { GlobalContext } from "../context/GlobalContext";
 
 /**
- * DATI COSTANTI (Spostati fuori dal componente per performance)
+ * DICTIONARY LAYER: CENTRALIZED UI STRINGS CONFIGURATION
+ * All presentation-tier copy is isolated here to guarantee maintainability
+ * and support potential future localization (i18n) workflows.
+ */
+const UI_STRINGS = {
+    hero: {
+        location: "Collegiove (RI)",
+        title: "Bar Trattoria I Fortunelli",
+        subtitle: "Nel cuore di un piccolo borgo tra le montagne, la tradizione incontra l'autenticità dei sapori locali.",
+        cta: "Prenota un Tavolo"
+    },
+    welcome: {
+        title: "Benvenuti a I Fortunelli",
+        description1: "Nel cuore di Collegiove, tra il verde incontaminato delle montagne e l'atmosfera autentica di un piccolo borgo, nasce uno spazio che è un po' casa e un po' tradizione.",
+        description2: "Siamo Bar, Trattoria, Bottega alimentare e Tabacchi: il punto di ritrovo ideale per chiunque voglia riscoprire i sapori di una volta."
+    },
+    instagram: {
+        title: "La Nostra Galleria Instagram",
+        subtitle: "Scatti dalla nostra cucina e momenti trascorsi insieme nel borgo",
+        cta: "Seguici su Instagram"
+    },
+    logistics: {
+        heading: "Orari e Dove Trovarci",
+        hoursTitle: "Orari di Apertura:",
+        closedLabel: "Chiuso",
+        tuesdayLabel: "Martedì:",
+        openDaysLabel: "Mercoledì - Lunedì:",
+        timeRange: "08:00 - 23:00",
+        holidayDisclaimer: "* Gli orari potrebbero subire variazioni durante le Festività",
+        contactTitle: "Posizione e Contatti:",
+        brandName: "Bar Trattoria I Fortunelli",
+        phoneLabel: "Telefono:",
+        whatsappAriaLabel: "Chatta con noi su WhatsApp",
+        mapHeading: "La Nostra Posizione nel Borgo"
+    }
+};
+
+/**
+ * STATIC DATA AND ASSET PATH MATRICES
+ * Declared outside the component scope to minimize unnecessary evaluation cycles on re-renders.
  */
 
-// Specialità culinarie per la Galleria Instagram
+// Simulated Instagram post structures mapped with static fallback permalinks
 const instagramPostsData = [
     { id: 1, media_url: '/tagliere_misto.jpg', caption: 'Tagliere misto di salumi e formaggi tipici' },
     { id: 2, media_url: '/pasta_e_fagioli.jpg', caption: 'Pasta e fagioli cremosa secondo tradizione' },
@@ -19,11 +60,10 @@ const instagramPostsData = [
     { id: 8, media_url: '/tiramisu.jpg', caption: 'Tiramisù artigianale fatto in casa' }
 ].map(post => ({
     ...post,
-    // Generiamo un permalink statico per semplicità nel mock
     permalink: 'https://www.instagram.com/bar_trattoria_i_fortunelli/'
 }));
 
-// Immagini per lo scorrimento infinito nell'Hero Banner
+// Background asset registry array for the infinite decorative banner slider
 const heroImagesData = [
     { url: "/grigliata_mista.jpg", alt: "Grigliata di carne mista" },
     { url: "/maritozzo_panna.jpg", alt: "Maritozzo con panna fresca" },
@@ -35,7 +75,7 @@ const heroImagesData = [
     { url: "/ravioli_tartufo.jpg", alt: "Ravioli fatti in casa al tartufo" }
 ];
 
-// Elenco dei servizi offerti
+// Structural vector icon specifications mapped to localized visual feature labels
 const serviziData = [
     {
         label: "Tabacchi",
@@ -47,7 +87,7 @@ const serviziData = [
         )
     },
     {
-        label: "Bancomat Paese",
+        label: "Bancomat",
         icon: (
             <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15A2.25 2.25 0 0 0 2.25 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Z" />
@@ -64,34 +104,38 @@ const serviziData = [
         )
     },
     {
-        label: "Vicino alla Chiesa",
+        label: "Wi-Fi Gratuito",
         icon: (
             <svg className="h-5 w-5 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 14.25a5.25 5.25 0 0 1 7.5 0M4.5 10.5a10.5 10.5 0 0 1 15 0M1.5 6.75a15.75 15.75 0 0 1 21 0" />
+                <path fill="currentColor" d="M12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1. Z" />
             </svg>
         )
     }
 ];
 
 /**
- * COMPONENTE PAGINA PRINCIPALE
+ * CLIENT COMPONENT EXPORT
  */
 export default function AppHomePageContent() {
+    // Consume context variables containing operational endpoints and contact nodes
+    const { businessDetails } = useContext(GlobalContext);
+
     return (
         <main className="relative min-h-screen w-full overflow-x-hidden bg-stone-50">
 
-            {/* SEZIONE 1: Hero Banner Dinamico con Scorrimento Infinito */}
+            {/* SECTION 1: Dynamic Hero Banner featuring an Infinite Horizontal CSS Track Marquee */}
             <section className="relative w-full bg-stone-500 flex items-center justify-center min-h-[85dvh] overflow-hidden">
 
-                {/* Traccia di sfondo per il Carousel (con effetto scorrimento infinito) */}
-                <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden aria-hidden=true">
+                {/* Decorative Marquee Layer (Aria-hidden ensures absolute structural avoidance by screen readers) */}
+                <div className="absolute inset-0 w-full h-full flex items-center opacity-30 select-none pointer-events-none overflow-hidden" aria-hidden="true">
                     <div className="w-full h-full inline-flex flex-nowrap [mask-image:_linear-gradient(to_right,transparent_0%,_black_15%,_black_85%,transparent_100%)]">
 
-                        {/* Creazione dell'animazione: usiamo due blocchi identici che si inseguono */}
+                        {/* Duplicated layout tracks executed synchronously to assemble fluid loop cycles */}
                         {[...Array(2)].map((_, blockIndex) => (
                             <div key={`hero-track-${blockIndex}`} className="flex items-center h-full animate-infinite-scroll">
                                 {heroImagesData.map((item, index) => {
-
+                                    // Optimization flag targeting the first graphic container block node to clear the LCP rendering pipeline
                                     const isFirstImage = blockIndex === 0 && index === 0;
 
                                     return (
@@ -116,42 +160,45 @@ export default function AppHomePageContent() {
                     </div>
                 </div>
 
-                {/* Testi Principali e Call-to-Action sovrapposti */}
+                {/* Core Brand Callout Messaging Layout */}
                 <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 py-12">
                     <span className="inline-block text-amber-400 font-semibold tracking-widest text-sm uppercase mb-3">
-                        Collegiove (RI)
+                        {UI_STRINGS.hero.location}
                     </span>
                     <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white tracking-tight drop-shadow-md mb-6">
-                        Bar Trattoria I Fortunelli
+                        {UI_STRINGS.hero.title}
                     </h1>
                     <p className="text-lg md:text-2xl text-stone-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                        Nel cuore di un piccolo borgo tra le montagne, la tradizione incontra l&apos;autenticità dei sapori locali.
+                        {UI_STRINGS.hero.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="tel:+393491061911" className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 shadow-lg text-center transform hover:-translate-y-0.5">
-                            Prenota un Tavolo
+                        <a 
+                            href={`tel:${businessDetails.tel1 || businessDetails.tel2 || ''}`} 
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 shadow-lg text-center transform hover:-translate-y-0.5"
+                        >
+                            {UI_STRINGS.hero.cta}
                         </a>
                     </div>
                 </div>
             </section>
 
-            {/* SEZIONE 2: Presentazione Identità / Chi Siamo */}
+            {/* SECTION 2: Identity Presentation / Core Structural Narrative Section */}
             <section className="py-10 md:py-20 bg-stone-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
 
-                    {/* Colonna Sinistra: Testi e Griglia Servizi */}
+                    {/* Left Column Stack: Promotional Text and Facilities Infrastructure Grid */}
                     <div className="lg:w-1/2">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-6 tracking-tight">
-                            Benvenuti a I Fortunelli
+                            {UI_STRINGS.welcome.title}
                         </h2>
                         <p className="text-stone-600 leading-relaxed mb-4 text-base md:text-lg">
-                            Nel cuore di Collegiove, tra il verde incontaminato delle montagne e l&apos;atmosfera autentica di un piccolo borgo, nasce uno spazio che è un po&apos; casa e un po&apos; tradizione.
+                            {UI_STRINGS.welcome.description1}
                         </p>
                         <p className="text-stone-600 leading-relaxed mb-6 text-base md:text-lg">
-                            Siamo Bar, Trattoria, Bottega alimentare e Tabacchi: il punto di ritrovo ideale per chiunque voglia riscoprire i sapori di una volta.
+                            {UI_STRINGS.welcome.description2}
                         </p>
 
-                        {/* Griglia Icone: Elenco servizi locali */}
+                        {/* Available amenities visual rendering block map */}
                         <div className="grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-stone-200">
                             {serviziData.map((servizio, index) => (
                                 <div
@@ -169,16 +216,14 @@ export default function AppHomePageContent() {
                         </div>
                     </div>
 
-                    {/* Colonna Destra: Immagine Statica del Bar */}
+                    {/* Right Column Stack: High-Resolution Static Branding Thumbnail Framing */}
                     <div className="lg:w-1/2 w-full">
                         <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
                                 src="/bar.png"
                                 alt="Facciata Bar Trattoria I Fortunelli"
                                 fill
-                                // FIX SIZES: Usata sintassi CSS corretta
                                 sizes="(max-w: 768px) 100vw, 50vw"
-                                // FIX SCALE: Usata classe arbitraria scale-[1.02] al posto di scale-102
                                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                             />
                         </div>
@@ -186,15 +231,19 @@ export default function AppHomePageContent() {
                 </div>
             </section>
 
-            {/* SEZIONE 3: Galleria Visiva / Social Proof (Mock Instagram) */}
+            {/* SECTION 3: Visual Social Proof Media Showcase (Mocked Instagram Carousel Grid) */}
             <section className="py-10 md:py-20 bg-stone-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-xl mx-auto mb-12">
-                        <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-3">La Nostra Galleria Instagram</h2>
-                        <p className="text-stone-600">Scatti dalla nostra cucina e momenti trascorsi insieme nel borgo</p>
+                        <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-3">
+                            {UI_STRINGS.instagram.title}
+                        </h2>
+                        <p className="text-stone-600">
+                            {UI_STRINGS.instagram.subtitle}
+                        </p>
                     </div>
 
-                    {/* Griglia delle Immagini Social */}
+                    {/* Highly Responsive Media Showcase Grid Layout Container */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-6">
                         {instagramPostsData.map(post => (
                             <a
@@ -208,11 +257,10 @@ export default function AppHomePageContent() {
                                     src={post.media_url}
                                     alt={post.caption}
                                     fill
-                                    // FIX SIZES: Usata sintassi CSS corretta
                                     sizes="(max-w: 640px) 50vw, (max-w: 1024px) 25vw, 12.5vw"
                                     className="object-cover transition duration-500 group-hover:scale-105"
                                 />
-                                {/* Overlay con Caption visibile al passaggio del mouse */}
+                                {/* Elegant Caption Backdrop Reveal Triggered solely upon active hover states */}
                                 <div className="absolute inset-0 bg-stone-950/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 px-4">
                                     <p className="text-white text-center text-xs font-medium line-clamp-3">{post.caption}</p>
                                 </div>
@@ -220,7 +268,7 @@ export default function AppHomePageContent() {
                         ))}
                     </div>
 
-                    {/* Pulsante Call-to-Action verso il profilo Instagram reale */}
+                    {/* External Routing CTA Target Link heading directly to the Live Instagram Account */}
                     <div className="text-center mt-12">
                         <a
                             href="https://www.instagram.com/bar_trattoria_i_fortunelli/"
@@ -228,72 +276,90 @@ export default function AppHomePageContent() {
                             rel="noopener noreferrer"
                             className="bg-stone-800 hover:bg-stone-900 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 inline-flex items-center shadow-md transform hover:-translate-y-0.5"
                         >
-                            Seguici su Instagram <span className="ml-2 text-xl" aria-hidden="true">📸</span>
+                            {UI_STRINGS.instagram.cta} <span className="ml-2 text-xl" aria-hidden="true">📸</span>
                         </a>
                     </div>
                 </div>
             </section>
 
-            {/* SEZIONE 4: Logistica / Orari e Mappa Geocalizzata */}
+            {/* SECTION 4: Logistics Framework, Operating Hours Matrix, & Interactive Map Integrations */}
             <section className="py-10 md:py-20 bg-stone-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch gap-12">
 
-                    {/* Colonna Testi: Orari e Info Contatto */}
+                    {/* Operational Timings & Communication Channels Wrapper */}
                     <div className="md:w-1/2 flex flex-col justify-between">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-8 tracking-tight">Orari e Dove Trovarci</h2>
+                            <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 mb-8 tracking-tight">
+                                {UI_STRINGS.logistics.heading}
+                            </h2>
 
-                            {/* Scheda Orari di Apertura */}
+                            {/* Operational Schedule Data Display Card */}
                             <div className="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
                                 <h3 className="font-bold text-stone-800 text-lg mb-3 flex items-center">
-                                    <span className="mr-2" aria-hidden="true">🕒</span> Orari di Apertura:
+                                    <span className="mr-2" aria-hidden="true">🕒</span> {UI_STRINGS.logistics.hoursTitle}
                                 </h3>
                                 <ul className="space-y-2 text-stone-700 text-base">
-                                    {/* Evidenziamo il giorno di chiusura */}
+                                    {/* Explicit visual style isolation applied to highlight the business closing day row */}
                                     <li className="flex justify-between border-b border-stone-100 pb-1 font-medium text-amber-700 bg-amber-50/50 px-2 rounded">
-                                        <span>Martedì:</span> <span>Chiuso</span>
+                                        <span>{UI_STRINGS.logistics.tuesdayLabel}</span> <span>{UI_STRINGS.logistics.closedLabel}</span>
                                     </li>
                                     <li className="flex justify-between border-b border-stone-100 pb-1 px-2">
-                                        <span>Mercoledì - Lunedì:</span>
-                                        <span>08:00 - 23:00</span>
+                                        <span>{UI_STRINGS.logistics.openDaysLabel}</span>
+                                        <span>{UI_STRINGS.logistics.timeRange}</span>
                                     </li>
                                     <li className="text-sm text-stone-500 pt-1">
-                                        * Gli orari potrebbero subire variazioni durante le Festività
+                                        {UI_STRINGS.logistics.holidayDisclaimer}
                                     </li>
                                 </ul>
                             </div>
 
-                            {/* Scheda Posizione e Contatti Diretti */}
+                            {/* Geographic Registry Credentials & Direct Instant Calling Nodes */}
                             <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
                                 <h3 className="font-bold text-stone-800 text-lg mb-3 flex items-center">
-                                    <span className="mr-2" aria-hidden="true">📍</span> Posizione e Contatti:
+                                    <span className="mr-2" aria-hidden="true">📍</span> {UI_STRINGS.logistics.contactTitle}
                                 </h3>
-                                <p className="text-stone-700 text-base mb-1 font-medium">Bar Trattoria I Fortunelli</p>
-                                <p className="text-stone-600 text-base mb-4">Via Umberto I 135, 02020 Collegiove (RI)</p>
-                                <div className="text-stone-800 font-semibold pt-2 border-t border-stone-100 flex items-center justify-between">
-                                    <span>Telefono: <a href="tel:+393491061911" className="text-emerald-700 hover:underline">+39 349 106 1911</a></span>
-                                    {/* Link Diretto a WhatsApp */}
-                                    <a
-                                        href="https://wa.me/393491061911"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-emerald-700 hover:text-emerald-500 transition-colors inline-flex items-center align-middle text-2xl"
-                                        aria-label="Chatta con noi su WhatsApp"
-                                    >
-                                        <FaWhatsapp />
-                                    </a>
+                                <p className="text-stone-700 text-base mb-1 font-medium">{UI_STRINGS.logistics.brandName}</p>
+                                <p className="text-stone-600 text-base mb-4">{businessDetails.address}</p>
+                                <div className="text-stone-800 font-semibold pt-2 border-t border-stone-100">
+                                    
+                                    {/* Voice Call & Instant Message Line Channel 1 */}
+                                    <div className="flex mb-2 items-center justify-between">
+                                        <span>{UI_STRINGS.logistics.phoneLabel} <a href={`tel:${businessDetails.tel1}`} className="text-emerald-700 hover:underline"> {businessDetails.tel1}</a></span>
+                                        <a
+                                            href={businessDetails.wa1}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-emerald-700 hover:text-emerald-500 transition-colors inline-flex items-center text-2xl"
+                                            aria-label={UI_STRINGS.logistics.whatsappAriaLabel}
+                                        >
+                                            <FaWhatsapp />
+                                        </a>
+                                    </div>
+
+                                    {/* Voice Call & Instant Message Line Channel 2 */}
+                                    <div className="flex items-center justify-between">
+                                        <span>{UI_STRINGS.logistics.phoneLabel} <a href={`tel:${businessDetails.tel2}`} className="text-emerald-700 hover:underline"> {businessDetails.tel2}</a></span>
+                                        <a
+                                            href={businessDetails.wa2}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-emerald-700 hover:text-emerald-500 transition-colors inline-flex items-center text-2xl"
+                                            aria-label={UI_STRINGS.logistics.whatsappAriaLabel}
+                                        >
+                                            <FaWhatsapp />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Colonna Mappa: Integrazione Google Maps */}
+                    {/* Map Pipeline Frame Element Stack Container */}
                     <div className="md:w-1/2 w-full flex flex-col">
                         <h3 className="font-bold text-stone-800 text-lg mb-4 flex items-center">
-                            <span className="mr-2" aria-hidden="true">🗺️</span> La Nostra Posizione nel Borgo
+                            <span className="mr-2" aria-hidden="true">🗺️</span> {UI_STRINGS.logistics.mapHeading}
                         </h3>
-                        {/* Contenitore Mappa con altezza minima fissa per responsività */}
-                        <div className="w-full h-full min-h-[350px] rounded-2xl shadow-lg overflow-hidden border border-stone-200">
+                        <div className="w-full h-full rounded-2xl shadow-lg overflow-hidden border border-stone-200 min-h-[350px]">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1478.4399398210924!2d13.037742631873435!3d42.17425091920932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132fbda9931d256d%3A0x77ec4cadda7b9e85!2sBar%20Trattoria%20%22I%20Fortunelli%22!5e0!3m2!1sit!2sit!4v1780914452471!5m2!1sit!2sit"
                                 className="w-full h-full min-h-[350px]"
@@ -301,7 +367,7 @@ export default function AppHomePageContent() {
                                 allowFullScreen=""
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="Mappa Google Maps di Bar Trattoria I Fortunelli"
+                                title={UI_STRINGS.logistics.brandName}
                             ></iframe>
                         </div>
                     </div>

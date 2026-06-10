@@ -2,13 +2,12 @@
 @import "tailwindcss";
 
 @theme {
-  /* 1. Definiamo i movimenti esatti dell'animazione (Keyframes) */
   @keyframes infinite-scroll {
     from { transform: translateX(0); }
     to { transform: translateX(-100%); }
   }
 
-  /* 2. Creiamo la classe unendo movimento, tempo e loop */
+
   --animate-infinite-scroll: infinite-scroll 100s linear infinite;
 }
 
