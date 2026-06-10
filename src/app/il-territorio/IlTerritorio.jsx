@@ -232,7 +232,7 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                 alt={`${altTextBase} slide ${currentIndex + 1}`}
                 fill
                 priority={priorityLoad && currentIndex === 0}
-                sizes="(max-w: 768px) 100vw, (max-w: 1280px) 100vw, 1024px"
+                sizes="(max-w: 768px) 50vw, (max-w: 1280px) 50vw, 1024px"
                 className="object-cover transition-all duration-500 select-none pointer-events-none"
             />
 
