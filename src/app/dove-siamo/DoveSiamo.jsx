@@ -30,7 +30,7 @@ const UI_STRINGS = {
         timeRange: "08:00 - 23:00",
         otherDays: ["Mercoledì", "Giovedì", "Venerdì", "Sabato", "Domenica", "Lunedì"],
         weekendDays: ["Sabato", "Domenica"],
-        holidayDisclaimer: "* Nota: Durante i giorni festivi o la settimana di Ferragosto gli orari potrebbero variare. Consigliamo sempre un colpo di telefono preventivo!"
+        holidayDisclaimer: "* Nota: Durante i festivi gli orari potrebbero variare. Consigliamo sempre un colpo di telefono preventivo!"
     },
     mapCard: {
         title: "Mappa Bar Trattoria I Fortunelli"
@@ -44,15 +44,15 @@ const UI_STRINGS = {
             suffix: ". Prosegui sulla Strada Statale in direzione del Lago del Turano, seguendo poi i cartelli stradali panoramici per Collegiove. La strada è comoda, asfaltata di recente e amatissima da chi viaggia su due ruote."
         },
         rieti: {
-            prefix: "Da Rieti (circa 40 min):",
-            suffix: "Esci dalla città in direzione del bivio di Torano / Lago del Turano e risali lungo la strada provinciale godendoti la vista sulle vette della riserva naturale."
+            prefix: "Da Rieti (circa 50 min):",
+            suffix: "Esci dalla città in direzione del bivio di Torano/Lago del Turano e risali lungo la strada provinciale godendoti la vista sulle vette della riserva naturale."
         }
     },
     parkingCard: {
-        heading: "Parcheggi e Sosta Comoda",
+        heading: "Sosta Comoda",
         car: {
             prefix: "Per le Auto:",
-            suffix: "Troverai ampio spazio di parcheggio gratuito lungo Via Roma e nelle immediate vicinanze dell&apos;ingresso del paese, a pochissimi passi a piedi dalla nostra Trattoria."
+            suffix: "Troverai spazio di parcheggio gratuito lungo Via Roma e nelle immediate vicinanze dell&apos;ingresso del paese, a pochissimi passi a piedi dalla nostra Trattoria."
         },
         motorcycle: {
             prefix: "Per Moto e Bici:",

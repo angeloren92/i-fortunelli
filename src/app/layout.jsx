@@ -45,8 +45,11 @@ export const metadata = {
   metadataBase: new URL('https://ifortunelli.com'),
   robots: { index: true, follow: true },
   icons: {
-    icon: '/logo_white.png', 
-    apple: '/logo_white.png', 
+    icon: [
+      { url: '/favicon.avif', type: 'image/avif' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ],
+    apple: '/logo_white.avif', 
   },
 };
 
@@ -59,6 +62,9 @@ export default function RootLayout({ children }) {
       data-scroll-behavior="smooth" 
     >
       <head>
+        <link rel="icon" type="image/avif" href="/favicon.avif" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         {/* Inject scripts to browser navigation recovery */}
         <script dangerouslySetInnerHTML={{ __html: bfcacheRecoveryScript }} />
       </head>

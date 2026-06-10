@@ -48,7 +48,7 @@ export default function Header() {
                 {/* BRAND IDENTITY BLOCK: Render optimized round logo asset and responsive restaurant typography */}
                 <Link href="/" className="flex items-center gap-3 group">
                     <Image
-                        src="/logo.png"
+                        src="/logo.avif"
                         alt={UI_STRINGS.a11y.logoAlt}
                         width={100}
                         height={100}

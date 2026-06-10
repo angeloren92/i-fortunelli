@@ -1,6 +1,8 @@
 'use client';
 
+import { useContext } from "react";
 import Image from "next/image";
+import { GlobalContext } from "../../context/GlobalContext";
 
 /**
  * DICTIONARY LAYER: CENTRALIZED UI STRINGS CONFIGURATION
@@ -19,23 +21,25 @@ const UI_STRINGS = {
             highlight: "Trattoria Bar I Fortunelli",
             suffix: " nasce dal desiderio profondo di custodire, valorizzare e tramandare i sapori autentici della nostra terra. Situati all'ingresso di Collegiove, portiamo in tavola l'antica tradizione culinaria locale in un'atmosfera che profuma di casa, pensata per farti sentire parte della nostra famiglia fin dal primo istante."
         },
-        paragraph2: "La nostra è una storia fatta di gesti semplici e immutati nel tempo, il profumo del sugo che borbotta lento fin dalle prime ore del mattino e l'accoglienza calorosa riservata a chiunque varchi la nostra porta. Ogni ricetta che proponiamo racconta un pezzo della nostra vita, un ricordo d'infanzia e un tributo alle nostre radici montane.",
-
-        // Philosophy and local supply chain block configuration
-        philosophy: {
-            title: "Tradizione a Chilometro Zero",
-            text: "Ogni giorno selezioniamo con cura millimetrica ingredienti genuini provenienti direttamente dai piccoli produttori, pastori e coltivatori della zona. Crediamo fermamente che la vera qualità nasca dal rispetto della stagionalità e dalla valorizzazione della filiera corta. Dalla cacciagione ai formaggi locali, fino alle nostre celebri paste fresche, ogni piatto celebra la ricchezza gastronomica della valle e delle vette della riserva naturale."
-        },
-
-        // Local community hub and travelers block configuration
-        community: {
-            title: "Un punto di sosta nel cuore del borgo",
-            text: "Nel corso degli anni, I Fortunelli è diventato molto più di un semplice bar trattoria: siamo un punto di ritrovo fisso per la comunità locale e una tappa immancabile per i viaggiatori di passaggio. Che tu sia un escursionista di ritorno dai sentieri naturalistici, un motociclista che si gode le curve panoramiche del Lago del Turano, o una famiglia riunita per il classico pranzo della domenica, qui troverai sempre un rifugio di totale relax e un piatto fumante pronto a rigenerarti."
-        }
+        paragraph2: "La nostra è una storia fatta di gesti semplici e immutati nel tempo, il profumo del sugo che borbotta lento fin dalle prime ore del mattino e l'accoglienza calorosa riservata a chiunque varchi la nostra porta. Ogni ricetta che proponiamo racconta un pezzo della nostra vita, un ricordo d'infanzia e un tributo alle nostre radici montane."
     },
     assets: {
         imageAlt: "I segreti della nostra cucina tradizionale",
-        secondaryImageAlt: "Scorcio dell'accoglienza alla Trattoria I Fortunelli"
+        secondaryImageAlt: "Scorcio dell'accoglienza alla Trattoria I Fortunelli",
+        
+        // Nuova configurazione per la galleria immagini
+        galleryTitle: "I Nostri Spazi e le Nostre Specialità",
+        gallery: [
+            { src: "/la-nostra-storia/scaffale1.avif", alt: "Scaffale con i prodotti tipici", styles: "col-span-1 md:col-span-2 aspect-square" },
+            { src: "/la-nostra-storia/macchina_caffe.avif", alt: "La nostra macchina del caffè", styles: "col-span-1 md:col-span-2 aspect-square" },
+            { src: "/la-nostra-storia/bancone.avif", alt: "Il bancone della trattoria", styles: "col-span-2 md:col-span-2 aspect-[2/1] md:aspect-square" },
+            { src: "/la-nostra-storia/affettati.avif", alt: "I nostri affettati locali", styles: "col-span-1 md:col-span-3 aspect-square md:aspect-[2/1]" },
+            { src: "/la-nostra-storia/gelato.avif", alt: "Il nostro gelato artigianale", styles: "col-span-1 md:col-span-3 aspect-square md:aspect-[2/1]" }
+        ]
+    },
+    footer: {
+        ctaLabel: "Prenota il tuo tavolo",
+        ctaDescription: "Chiama ora per riservare un tavolo e vivere l'accoglienza autentica di Collegiove.",
     }
 };
 
@@ -44,6 +48,8 @@ const UI_STRINGS = {
  * Renders the historical background, heritage values, and introductory context of the restaurant.
  */
 export default function LaNostraStoria() {
+    const { businessDetails } = useContext(GlobalContext);
+
     return (
         <main>
             {/* Main storytelling section */}
@@ -81,10 +87,10 @@ export default function LaNostraStoria() {
                         {/* Right Column: High-quality static photography wrapper frame with hover animation */}
                         <div className="relative w-full aspect-[1/1] rounded-3xl shadow-xl overflow-hidden group">
                             <Image
-                                src="/la-nostra-storia/foto.png"
+                                src="/la-nostra-storia/foto.avif"
                                 alt={UI_STRINGS.assets.imageAlt}
                                 fill
-                                sizes="(max-w: 768px) 100vw, 50vw"
+                                sizes="(max-w: 768px) 100vw, 100vw"
                                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                                 priority
                             />
@@ -92,36 +98,41 @@ export default function LaNostraStoria() {
 
                     </div>
 
-                    {/* CHAPTER 2: PHILOSOPHY & COMMUNITY PILLARS */}
-                    {/* Multi-column expanded matrix layout separated by an elegant structural divider */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 border-t border-stone-200/80 pt-12 sm:pt-16">
+                    {/* CHAPTER 2: VISUAL GALLERY */}
+                    {/* Bento-box style photo grid to showcase the newly added un-tracked assets */}
+                    <div className="mt-16 pt-12">
+                        <h3 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-10 text-center">
+                            {UI_STRINGS.assets.galleryTitle}
+                        </h3>
                         
-                        {/* Philosophy Segment Box */}
-                        <article className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/60 shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span className="text-2xl mb-4 block" aria-hidden="true">🌱</span>
-                                <h3 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">
-                                    {UI_STRINGS.story.philosophy.title}
-                                </h3>
-                                <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-                                    {UI_STRINGS.story.philosophy.text}
-                                </p>
-                            </div>
-                        </article>
+                        <div className="grid grid-cols-2 md:grid-cols-6 gap-4 lg:gap-6">
+                            {UI_STRINGS.assets.gallery.map((image, index) => (
+                                <div 
+                                    key={index} 
+                                    className={`relative w-full rounded-2xl shadow-sm overflow-hidden group ${image.styles}`}
+                                >
+                                    <Image
+                                        src={image.src}
+                                        alt={image.alt}
+                                        fill
+                                        sizes="(max-w: 768px) 100vw, 100vw"
+                                        className="object-cover transition duration-500 group-hover:scale-105"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-                        {/* Community and Pit-Stop Hub Segment Box */}
-                        <article className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/60 shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span className="text-2xl mb-4 block" aria-hidden="true">🏔️</span>
-                                <h3 className="text-xl sm:text-2xl font-bold text-stone-900 mb-4">
-                                    {UI_STRINGS.story.community.title}
-                                </h3>
-                                <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-                                    {UI_STRINGS.story.community.text}
-                                </p>
-                            </div>
-                        </article>
-
+                    <div className="mt-16 text-center">
+                        <p className="mx-auto max-w-2xl text-base text-stone-600 mb-6">
+                            {UI_STRINGS.footer.ctaDescription}
+                        </p>
+                        <a
+                            href={`tel:${businessDetails?.tel1 || businessDetails?.tel2}`}
+                            className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
+                        >
+                            {UI_STRINGS.footer.ctaLabel}
+                        </a>
                     </div>
 
                 </div>

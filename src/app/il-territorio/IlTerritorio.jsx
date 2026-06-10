@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, isValidElement } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { FaMotorcycle, FaCameraRetro, FaChurch, FaUsers, FaPalette, FaHandsHelping, FaMusic } from "react-icons/fa";
+import { GiHiking, GiFlowerTwirl } from "react-icons/gi";
 import { GlobalContext } from "../../context/GlobalContext";
 
 /**
@@ -17,7 +19,8 @@ const UI_STRINGS = {
         description: "Abbiamo diviso le meraviglie del nostro territorio per aiutarti con la giornata nel borgo."
     },
     footer: {
-        ctaLabel: "Chiama per la tua Sosta"
+        ctaLabel: "Chiama per la tua Sosta",
+        ctaDescription: "Chiama ora per prenotare un tavolo e vivere la nostra ospitalità dopo il giro nel territorio.",
     },
     fallback: {
         videoNotSupported: "Il tuo browser non supporta i video HTML5."
@@ -42,23 +45,18 @@ const sezioniTerritorioConfig = [
                 details: "Collegiove è circondato da una rete di sentieri spettacolari, perfetti sia per escursionisti esperti che per famiglie in cerca di una passeggiata rilassante nella natura selvaggia del Lazio.",
                 tip: "📍 Consiglio dello staff: Passa a trovarci la mattina per un caffè e un panino d'asporto per il cammino, o prenota il tuo tavolo per una meritata ricarica a base di pasta fresca al tuo ritorno.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12h22.5m-22.5 0a9 9 0 1118 0 9 9 0 01-18 0z" />
-                    </svg>
+                    <GiHiking className="h-6 w-6 text-amber-700" />
                 ),
-                media: ["/territorio/trk1.jpeg", "/territorio/trk2.jpeg", "/territorio/trk3.jpeg", "/territorio/trk4.jpeg", "/territorio/trk5.jpeg", "/territorio/trk6.jpeg", "/territorio/trk7.jpeg"]
+                media: ["/territorio/trk1.avif", "/territorio/trk2.avif", "/territorio/trk3.avif", "/territorio/trk4.avif", "/territorio/trk5.avif", "/territorio/trk6.avif", "/territorio/trk7.avif", "/territorio/trk8.avif"]
             },
             {
                 id: "due-ruote",
                 title: "Due Ruote (Moto & Ciclismo)",
                 short: "Tra sterrati, curve e tornanti.",
-                details: "Che tu preferisca il rombo del motore tra i tornanti panoramici che costeggiano i laghi o la sfida silenziosa delle pendenze in sella a una bici da corsa o mountain bike, le nostre strade offrono percorsi suggestivi immersi nel silenzio.",
-                tip: "🏍️ 🚴 Bikers & Cyclists Welcome: Disponiamo di un ampio spazio esterno sicuro per parcheggiare moto e bici. Fermati da noi per ricaricare le borracce, una pausa caffè o un pranzo completo recupera-forze.",
+                details: "Che tu preferisca il rombo del motore tra i tornanti panoramici che costeggiano i monti o la sfida silenziosa delle pendenze in sella a una bici da corsa o mountain bike, le nostre strade offrono percorsi suggestivi immersi nel silenzio.",
+                tip: "🏍️ 🚴 Bikers & Cyclists Welcome: Ampio spazio esterno sicuro per parcheggiare moto e bici. Fermati da noi per ricaricare le borracce, una pausa caffè o un pranzo completo recupera-forze.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.15 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75zM17.85 17.25a3.375 3.375 0 100-6.75 3.375 3.375 0 000 6.75z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 10.5l-2.25 3h4.5M13.5 7.5h3.75M16.125 10.5l-1.875-3.75M6.15 13.875h7.725" />
-                    </svg>
+                    <FaMotorcycle className="h-6 w-6 text-amber-700" />
                 ),
                 media: "/territorio/video.mp4"
             },
@@ -66,14 +64,13 @@ const sezioniTerritorioConfig = [
                 id: "fotografia",
                 title: "Fotografia & Panorami",
                 short: "Scorci e tramonti da immortalare.",
-                details: "Collegiove offers punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
+                details: "Collegiove offe punti panoramici straordinari sulla valle e angoli senza tempo tra i vicoli storici. È la meta ideale per gli appassionati di fotografia naturalistica, paesaggistica o per chi ama catturare i colori del tramonto.",
                 tip: "📸 Luce perfetta: Chiedici quali sono i punti panoramici più nascosti ed esclusivi del borgo per scattare le tue foto prima di sederti a cena da noi!",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                    </svg>
+                    <FaCameraRetro className="h-6 w-6 text-amber-700" />
                 ),
-                media: "/territorio/fotografia.mp4"
+                media: ["/territorio/foto1.avif", "/territorio/foto2.avif", "/territorio/foto3.avif", "/territorio/foto4.avif", "/territorio/foto5.avif", "/territorio/foto6.avif", "/territorio/foto7.avif", "/territorio/foto8.avif", "/territorio/foto9.avif"]
+
             },
             {
                 id: "chiesa",
@@ -82,10 +79,9 @@ const sezioniTerritorioConfig = [
                 details: "A pochissimi minuti a piedi dalla trattoria si può raggiungere il nucleo storico del borgo e visitare la caratteristica chiesa locale, custode della memoria storica e spirituale della nostra piccola comunità di montagna.",
                 tip: "⛪ Un luogo di pace perfetto per scattare qualche fotografia panoramica e assaporare l'atmosfera autentica dei vecchi borghi italiani.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-                    </svg>
-                )
+                    <FaChurch className="h-6 w-6 text-amber-700" />
+                ),
+                media: ["/territorio/chiesa1.avif", "/territorio/chiesa2.avif", "/territorio/chiesa3.avif", "/territorio/chiesa4.avif"]
             }
         ]
     },
@@ -101,22 +97,17 @@ const sezioniTerritorioConfig = [
                 details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
                 tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-10.24 0a3 3 0 0 0-4.681 2.72 9.094 9.094 0 0 0 3.741.479m11.24-15c1.455 0 2.635 1.18 2.635 2.636a2.636 2.636 0 0 1-5.272 0c0-1.455 1.18-2.636 2.636-2.636m-10.24 0a2.636 2.636 0 0 1 0 5.272 2.636 2.636 0 0 1 0-5.272M6 16.511c0-2.433 1.972-4.405 4.406-4.405h3.188C16.028 12.106 18 14.078 18 16.511m-12 0A14.97 14.97 0 0 0 12 18a14.97 14.97 0 0 0 6-1.49M12 9.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" />
-                    </svg>
+                    <FaUsers className="h-6 w-6 text-amber-700" />
                 )
             },
             {
                 id: "arte-cultura",
-                title: "Associazione Arte e Cultura",
+                title: "Tradizioni ArteCultura",
                 short: "Promozione dell'artigianato locale.",
-                details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri. L'associazione organizza eventi culturali, letture e mostre d'arte aperte durante i mesi caldi.",
-                tip: "🎨 Curiosità: Spesso collaboriamo ospitando nei nostri spazi le locandine o i piccoli manufatti degli artigiani locali per dare risalto al loro lavoro.",
+                details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri.",
+                tip: "🎨 Curiosità: In occasione delle feste di paese, i nostri spazi si animano ulteriormente ospitando stand dedicati per celebrare le tradizioni locali e vivere la festa insieme alla comunità.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-1.243l-.22-.13ZM14.47 16.122a3 3 0 0 1 5.78 1.128 2.25 2.25 0 0 0 2.4 2.245 4.5 4.5 0 0 1-8.4-1.243l.22-.13ZM12 13.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                    </svg>
+                    <FaPalette className="h-6 w-6 text-amber-700" />
                 )
             },
             {
@@ -126,11 +117,9 @@ const sezioniTerritorioConfig = [
                 details: "Luogo di ritrovo fondamentale per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
                 tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani si custodiscono i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
-                    </svg>
+                    <FaHandsHelping className="h-6 w-6 text-amber-700" />
                 ),
-                media: ["/territorio/centro1.png", "/territorio/centro2.jpeg"]
+                media: ["/territorio/centro1.avif", "/territorio/centro2.avif"]
             }
         ]
     },
@@ -141,26 +130,36 @@ const sezioniTerritorioConfig = [
         cards: [
             {
                 id: "feste",
-                title: "Festa di Ferragosto",
+                title: "Ferragosto",
                 short: "Il Ferragosto e le tradizioni vive della comunità.",
-                details: "L'estate a Collegiove raggiunge il suo culmine durante le imperdibili feste patronali e gli eventi di Ferragosto. Il paese prende vita with musica dal vivo, giochi della tradizione, manifestazioni e ricchi stand culinari.",
+                details: "L'estate a Collegiove raggiunge il suo culmine durante le imperdibili feste patronali e gli eventi di Ferragosto. Il paese prende vita con musica dal vivo, giochi della tradizione, manifestazioni e ricchi stand culinari.",
                 tip: "📅 Nota utile: Durante la settimana calda di Ferragosto i posti in paese sono richiestissimi! Ti consigliamo di prenotare il tuo tavolo con largo anticipo.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.283 8.283 0 015.466-4.386zm-4.088 4.413a5.25 5.25 0 115.32-6.748 5.25 5.25 0 00-5.32 6.748z" />
-                    </svg>
-                )
+                    <FaMusic className="h-6 w-6 text-amber-700" />
+                ),
+                media: ["/territorio/ferr1.avif", "/territorio/ferr2.avif", "/territorio/ferr3.avif", "/territorio/ferr4.avif", "/territorio/ferr5.avif"]
             },
             {
                 id: "infiorata",
                 title: "Infiorata del Corpus Domini",
                 short: "Gli storici vicoli coperti da disegni.",
-                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una traditione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi realizzati interamente con petali colorati e foglie.",
+                details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una traditione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi.",
                 tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i tappeti floreali intatti e profumatissimi prima della processione, per poi fermarti a pranzo da noi.",
                 icon: (
-                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.497-1.012-2.617-2.361l-.031-.343A2.25 2.25 0 0 1 11.597 1.5h.806a2.25 2.25 0 0 1 2.245 2.546l-.031.343C14.497 5.738 13.355 6.75 12 6.75Zm0 10.5v1.5m0-1.5c1.355 0 2.497 1.012 2.617 2.361l.031.343A2.25 2.25 0 0 1 12.403 22.5h-.806a2.25 2.25 0 0 1-2.245-2.546l.031-.343C9.503 18.262 10.645 17.25 12 17.25Zm-3.75-5.25h-1.5m1.5 0c0-1.355 1.012-2.497 2.361-2.617l.343-.031A2.25 2.25 0 0 1 13.5 11.597v.806a2.25 2.25 0 0 1-2.546 2.245l-.343-.031C9.262 14.497 8.25 13.355 8.25 12Zm10.5 0h1.5m-1.5 0c0 1.355-1.012 2.497-2.361 2.617l-.343.031A2.25 2.25 0 0 1 10.5 12.403v-.806a2.25 2.25 0 0 1 2.546-2.245l.343.031C14.738 9.503 15.75 10.645 15.75 12Z" />
-                    </svg>
+                    <GiFlowerTwirl className="h-6 w-6 text-amber-700" />
+                ),
+                media: (
+                    <iframe
+                        src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F981065018182670%2F&show_text=false&width=267&t=0"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 'none', overflow: 'hidden' }}
+                        scrolling="no"
+                        frameBorder="0"
+                        allowFullScreen={true}
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        className="absolute inset-0 rounded-xl shadow-md"
+                    />
                 )
             }
         ]
@@ -222,7 +221,7 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
     }, [currentIndex, images, length]);
 
     return (
-        <div 
+        <div
             className="relative w-full aspect-square rounded-xl overflow-hidden bg-stone-100 border border-stone-200 shadow-inner group/carousel touch-pan-y cursor-default"
             onClick={(e) => e.stopPropagation()}
             onTouchStart={onTouchStart}
@@ -233,26 +232,27 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                 alt={`${altTextBase} slide ${currentIndex + 1}`}
                 fill
                 priority={priorityLoad && currentIndex === 0}
-                sizes="(max-w: 768px) 100vw, (max-w: 1280px) 50vw, 640px"
+                sizes="(max-w: 768px) 100vw, (max-w: 1280px) 100vw, 1024px"
                 className="object-cover transition-all duration-500 select-none pointer-events-none"
             />
-            
+
             {length > 1 && (
                 <>
                     <button
                         type="button"
                         onClick={handlePrev}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
                         aria-label="Previous slide image"
                     >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
+
                     <button
                         type="button"
                         onClick={handleNext}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 opacity-0 group-hover/carousel:opacity-100 transition-opacity focus:outline-none hidden md:inline-flex z-10"
                         aria-label="Next slide image"
                     >
                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -264,9 +264,8 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                         {images.map((_, idx) => (
                             <span
                                 key={idx}
-                                className={`block h-1.5 w-1.5 rounded-full transition-all ${
-                                    currentIndex === idx ? 'bg-white w-3' : 'bg-white/50'
-                                }`}
+                                className={`block h-1.5 w-1.5 rounded-full transition-all ${currentIndex === idx ? 'bg-white w-3' : 'bg-white/50'
+                                    }`}
                             />
                         ))}
                     </div>
@@ -281,7 +280,7 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
  */
 export default function IlTerritorio() {
     const [activeId, setActiveId] = useState(null);
-    
+
     // Connect to application global details state
     const { businessDetails } = useContext(GlobalContext);
 
@@ -291,7 +290,7 @@ export default function IlTerritorio() {
 
     return (
         <main className="w-full min-h-screen flex items-center justify-center">
-            
+
             {/* Elevated context frame wrapper area */}
             <section className="relative z-10 w-full py-5 sm:py-10 my-5">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -328,7 +327,7 @@ export default function IlTerritorio() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                                     {sezione.cards.map((item, cardIndex) => {
                                         const isExpanded = activeId === item.id;
-                                        
+
                                         // Priority image optimization target flag assigned directly to above-the-fold visual elements
                                         const isFirstVisualElement = sectionIndex === 0 && cardIndex === 0;
 
@@ -346,8 +345,8 @@ export default function IlTerritorio() {
                                                 tabIndex={0}
                                                 aria-expanded={isExpanded}
                                                 className={`group block w-full text-left bg-white p-6 rounded-2xl border transition-all duration-300 outline-none select-none cursor-pointer ${isExpanded
-                                                        ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
-                                                        : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
+                                                    ? 'border-amber-500 shadow-md ring-1 ring-amber-500/20'
+                                                    : 'border-stone-200 shadow-sm hover:border-amber-500/40 hover:shadow-md'
                                                     }`}
                                             >
                                                 {/* Header Bar within the interactive card module */}
@@ -381,11 +380,15 @@ export default function IlTerritorio() {
                                                             <div className="my-3">
                                                                 {Array.isArray(item.media) ? (
                                                                     /* --- Preloaded Media Carousel Execution Track --- */
-                                                                    <CarouselOttimizzato 
-                                                                        images={item.media} 
+                                                                    <CarouselOttimizzato
+                                                                        images={item.media}
                                                                         altTextBase={item.title}
                                                                         priorityLoad={isFirstVisualElement}
                                                                     />
+                                                                ) : isValidElement(item.media) ? (
+                                                                    <div className="relative w-full aspect-[9/16] rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black">
+                                                                        {item.media}
+                                                                    </div>
                                                                 ) : (
                                                                     /* --- Standard Native 1:1 Aspect Ratio Video Frame Player --- */
                                                                     <div 
@@ -422,8 +425,11 @@ export default function IlTerritorio() {
 
                     {/* ROOT FOOTER OUTBOUND CONTEXT CALL TO ACTION */}
                     <div className="mt-16 text-center">
+                        <p className="mx-auto max-w-2xl text-base text-stone-600 mb-6">
+                            {UI_STRINGS.footer.ctaDescription}
+                        </p>
                         <Link
-                            href={`tel:${businessDetails?.tel1 || '+393491061911'}`}
+                            href={`tel:${businessDetails?.tel1 || businessDetails?.tel2}`}
                             className="inline-block rounded-full bg-amber-600 px-8 py-3.5 text-sm font-semibold text-white shadow transition-all hover:bg-amber-700 hover:shadow-md"
                         >
                             {UI_STRINGS.footer.ctaLabel}

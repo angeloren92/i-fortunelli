@@ -19,7 +19,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "Bar Trattoria I Fortunelli",
-  "image": "https://www.ifortunelli.com/images/hero-trattoria.jpg",
+  "image": "https://www.ifortunelli.com/images/hero-trattoria.avif",
   "telephone": "+393332510720",            
   "address": {
     "@type": "PostalAddress",

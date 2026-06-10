@@ -50,14 +50,14 @@ const UI_STRINGS = {
 
 // Simulated Instagram post structures mapped with static fallback permalinks
 const instagramPostsData = [
-    { id: 1, media_url: '/tagliere_misto.jpg', caption: 'Tagliere misto di salumi e formaggi tipici' },
-    { id: 2, media_url: '/pasta_e_fagioli.jpg', caption: 'Pasta e fagioli cremosa secondo tradizione' },
-    { id: 3, media_url: '/tartufo_e_guanciale.jpg', caption: 'Specialità: tartufo locale e guanciale croccante' },
-    { id: 4, media_url: '/grigliata_mista.jpg', caption: 'Grigliata mista di carne con prodotti locali' },
-    { id: 5, media_url: '/tagliata_con_porcini.jpg', caption: 'Tagliata tenera con funghi porcini freschi' },
-    { id: 6, media_url: '/panino_gourmet.jpg', caption: 'Panino gourmet con ingredienti del territorio' },
-    { id: 7, media_url: '/pinsa_zucca_e_guanciale.jpg', caption: 'Pinsa autunnale: crema di zucca e guanciale' },
-    { id: 8, media_url: '/tiramisu.jpg', caption: 'Tiramisù artigianale fatto in casa' }
+    { id: 1, media_url: '/tagliere_misto.avif', caption: 'Tagliere misto di salumi e formaggi tipici' },
+    { id: 2, media_url: '/pasta_e_fagioli.avif', caption: 'Pasta e fagioli cremosa secondo tradizione' },
+    { id: 3, media_url: '/tartufo_e_guanciale.avif', caption: 'Specialità: tartufo locale e guanciale croccante' },
+    { id: 4, media_url: '/grigliata_mista.avif', caption: 'Grigliata mista di carne con prodotti locali' },
+    { id: 5, media_url: '/tagliata_con_porcini.avif', caption: 'Tagliata tenera con funghi porcini freschi' },
+    { id: 6, media_url: '/panino_gourmet.avif', caption: 'Panino gourmet con ingredienti del territorio' },
+    { id: 7, media_url: '/pinsa_zucca_e_guanciale.avif', caption: 'Pinsa autunnale: crema di zucca e guanciale' },
+    { id: 8, media_url: '/tiramisu.avif', caption: 'Tiramisù artigianale fatto in casa' }
 ].map(post => ({
     ...post,
     permalink: 'https://www.instagram.com/bar_trattoria_i_fortunelli/'
@@ -65,14 +65,14 @@ const instagramPostsData = [
 
 // Background asset registry array for the infinite decorative banner slider
 const heroImagesData = [
-    { url: "/grigliata_mista.jpg", alt: "Grigliata di carne mista" },
-    { url: "/maritozzo_panna.jpg", alt: "Maritozzo con panna fresca" },
-    { url: "/panino_gourmet.jpg", alt: "Panino gourmet locale" },
-    { url: "/pasta_e_fagioli.jpg", alt: "Pasta e fagioli tradizionale" },
-    { url: "/pinsa_boscaiola.jpg", alt: "Pinsa romana boscaiola" },
-    { url: "/tagliere_misto.jpg", alt: "Tagliere di salumi e formaggi" },
-    { url: "/tiramisu.jpg", alt: "Tiramisù artigianale" },
-    { url: "/ravioli_tartufo.jpg", alt: "Ravioli fatti in casa al tartufo" }
+    { url: "/grigliata_mista.avif", alt: "Grigliata di carne mista" },
+    { url: "/maritozzo_panna.avif", alt: "Maritozzo con panna fresca" },
+    { url: "/panino_gourmet.avif", alt: "Panino gourmet locale" },
+    { url: "/pasta_e_fagioli.avif", alt: "Pasta e fagioli tradizionale" },
+    { url: "/pinsa_boscaiola.avif", alt: "Pinsa romana boscaiola" },
+    { url: "/tagliere_misto.avif", alt: "Tagliere di salumi e formaggi" },
+    { url: "/tiramisu.avif", alt: "Tiramisù artigianale" },
+    { url: "/ravioli_tartufo.avif", alt: "Ravioli fatti in casa al tartufo" }
 ];
 
 // Structural vector icon specifications mapped to localized visual feature labels
@@ -220,10 +220,10 @@ export default function AppHomePageContent() {
                     <div className="lg:w-1/2 w-full">
                         <div className="relative w-full aspect-[1/1] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
-                                src="/bar.png"
+                                src="/bar.avif"
                                 alt="Facciata Bar Trattoria I Fortunelli"
                                 fill
-                                sizes="(max-w: 768px) 100vw, 50vw"
+                                sizes="(max-w: 768px) 100vw, 100vw"
                                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                             />
                         </div>
@@ -257,7 +257,7 @@ export default function AppHomePageContent() {
                                     src={post.media_url}
                                     alt={post.caption}
                                     fill
-                                    sizes="(max-w: 640px) 50vw, (max-w: 1024px) 25vw, 12.5vw"
+                                    sizes="(max-w: 1024px) 100vw, (max-w: 1024px) 100vw, 100vw"
                                     className="object-cover transition duration-500 group-hover:scale-105"
                                 />
                                 {/* Elegant Caption Backdrop Reveal Triggered solely upon active hover states */}
