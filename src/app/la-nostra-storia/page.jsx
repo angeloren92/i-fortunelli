@@ -16,49 +16,48 @@ export const metadata = {
 };
 
 export default function Page() {
-  // 2. DATI STRUTTURATI JSON-LD (Specifici per la pagina "Chi Siamo" di un'attività locale)
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "AboutPage",
-        "@id": "https://www.tuodominio.it/la-nostra-storia#webpage",
-        "url": "https://www.tuodominio.it/la-nostra-storia",
-        "name": "La Nostra Storia - Bar Trattoria I Fortunelli",
-        "description": "La storia, le radici familiari e la filosofia culinaria basata su ingredienti genuini della Trattoria I Fortunelli a Collegiove.",
-        "breadcrumb": {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://www.tuodominio.it"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "La Nostra Storia",
-              "item": "https://www.tuodominio.it/la-nostra-storia"
-            }
-          ]
-        },
-        "mainEntity": {
-          "@type": "Restaurant",
-          "@id": "https://www.tuodominio.it/#restaurant",
-          "name": "Bar Trattoria I Fortunelli",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Via Roma 112",
-            "addressLocality": "Collegiove",
-            "addressRegion": "RI",
-            "postalCode": "02020",
-            "addressCountry": "IT"
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://www.ifortunelli.com/la-nostra-storia#webpage",
+      "url": "https://www.ifortunelli.com/la-nostra-storia",
+      "name": "La Nostra Storia - Bar Trattoria I Fortunelli",
+      "description": "La storia, le radici familiari e la filosofia culinaria basata su ingredienti genuini della Trattoria I Fortunelli a Collegiove.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.ifortunelli.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "La Nostra Storia",
+            "item": "https://www.ifortunelli.com/la-nostra-storia" 
           }
+        ]
+      },
+      "mainEntity": {
+        "@type": "Restaurant",
+        "@id": "https://www.ifortunelli.com/#restaurant", 
+        "name": "Bar Trattoria I Fortunelli",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Via Roma 112",
+          "addressLocality": "Collegiove",
+          "addressRegion": "RI",
+          "postalCode": "02020",
+          "addressCountry": "IT"
         }
       }
-    ]
-  };
+    }
+  ]
+};
 
   return (
     <>

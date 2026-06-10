@@ -90,6 +90,51 @@ const sezioniTerritorioConfig = [
         ]
     },
     {
+        id: "associazioni",
+        categoriaTitolo: "Associazioni Locali",
+        categoriaDescrizione: "La rete di persone e passioni che mantiene vivo e accogliente il nostro paese.",
+        cards: [
+            {
+                id: "pro-loco",
+                title: "Pro Loco Collegiove",
+                short: "Il motore delle nostre tradizioni.",
+                details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
+                tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
+                icon: (
+                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-10.24 0a3 3 0 0 0-4.681 2.72 9.094 9.094 0 0 0 3.741.479m11.24-15c1.455 0 2.635 1.18 2.635 2.636a2.636 2.636 0 0 1-5.272 0c0-1.455 1.18-2.636 2.636-2.636m-10.24 0a2.636 2.636 0 0 1 0 5.272 2.636 2.636 0 0 1 0-5.272M6 16.511c0-2.433 1.972-4.405 4.406-4.405h3.188C16.028 12.106 18 14.078 18 16.511m-12 0A14.97 14.97 0 0 0 12 18a14.97 14.97 0 0 0 6-1.49M12 9.75a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" />
+                    </svg>
+                )
+            },
+            {
+                id: "arte-cultura",
+                title: "Associazione Arte e Cultura",
+                short: "Promozione dell'artigianato locale.",
+                details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri. L'associazione organizza eventi culturali, letture e mostre d'arte aperte durante i mesi caldi.",
+                tip: "🎨 Curiosità: Spesso collaboriamo ospitando nei nostri spazi le locandine o i piccoli manufatti degli artigiani locali per dare risalto al loro lavoro.",
+                icon: (
+                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-1.243l-.22-.13ZM14.47 16.122a3 3 0 0 1 5.78 1.128 2.25 2.25 0 0 0 2.4 2.245 4.5 4.5 0 0 1-8.4-1.243l.22-.13ZM12 13.5a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                    </svg>
+                )
+            },
+            {
+                id: "centro-anziani",
+                title: "Centro Anziani Collegiove",
+                short: "Il cuore della memoria storica.",
+                details: "Luogo di ritrovo fondamentale per gli storici abitanti del paese. Rappresenta una risorsa preziosa per il borgo, mantenendo vive le storiche partite a carte, i tornei della tradizione e lo scambio di aneddoti senza tempo.",
+                tip: "🃏 Spirito del Borgo: È proprio grazie al legame con i saggi del Centro Anziani si custodiscono i segreti e le storie d'altri tempi che amiamo tanto raccontare ai nostri ospiti!",
+                icon: (
+                    <svg className="h-6 w-6 text-amber-700" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm5.25 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
+                    </svg>
+                ),
+                media: ["/territorio/centro1.png", "/territorio/centro2.jpeg"]
+            }
+        ]
+    },
+    {
         id: "eventi",
         categoriaTitolo: "Eventi & Tradizioni",
         categoriaDescrizione: "I moments più importanti dell'anno in cui il borgo si riempie di festa.",

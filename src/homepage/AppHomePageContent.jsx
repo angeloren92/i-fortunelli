@@ -218,7 +218,7 @@ export default function AppHomePageContent() {
 
                     {/* Right Column Stack: High-Resolution Static Branding Thumbnail Framing */}
                     <div className="lg:w-1/2 w-full">
-                        <div className="relative w-full aspect-[4/3] rounded-2xl shadow-xl overflow-hidden group">
+                        <div className="relative w-full aspect-[1/1] rounded-2xl shadow-xl overflow-hidden group">
                             <Image
                                 src="/bar.png"
                                 alt="Facciata Bar Trattoria I Fortunelli"

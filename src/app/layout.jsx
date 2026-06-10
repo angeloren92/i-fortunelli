@@ -37,13 +37,26 @@ const bfcacheRecoveryScript = `
 })();
 `;
 
+export const metadata = {
+  title: {
+    default: 'Bar Trattoria I Fortunelli',
+    template: '%s | Bar Trattoria I Fortunelli' 
+  },
+  metadataBase: new URL('https://ifortunelli.com'),
+  robots: { index: true, follow: true },
+  icons: {
+    icon: '/logo_white.png', 
+    apple: '/logo_white.png', 
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html 
       lang="it" 
       className={`${inter.variable} ${playfairDisplay.variable}`} 
       suppressHydrationWarning
-      data-scroll-behavior="smooth" // <-- AGGIUNTO QUI per silenziare il warning di Next.js
+      data-scroll-behavior="smooth" 
     >
       <head>
         {/* Inject scripts to browser navigation recovery */}
