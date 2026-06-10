@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -39,6 +40,15 @@ const menuLinks = [
 export default function Header() {
     // State hook logic to orchestrate the visibility of the mobile navigation dropdown drawer
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+
+    // Handle logo click: scroll to top if on homepage, otherwise navigate
+    const handleLogoClick = (e) => {
+        if (pathname === "/") {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
 
     return (
         // Sticky structural container with z-layer stacking (z-50) and blur backdrop styling
@@ -46,7 +56,7 @@ export default function Header() {
             <div className="mx-auto flex min-h-[15dvh] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
 
                 {/* BRAND IDENTITY BLOCK: Render optimized round logo asset and responsive restaurant typography */}
-                <Link href="/" className="flex items-center gap-3 group">
+                <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 group">
                     <Image
                         src="/logo.avif"
                         alt={UI_STRINGS.a11y.logoAlt}
