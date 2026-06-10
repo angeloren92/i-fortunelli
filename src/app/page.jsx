@@ -10,7 +10,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Bar Trattoria I Fortunelli | Cucina Tipica a Collegiove',
-    description: 'Sapori autentici, pasta fatta in casa e accoglienza familiare a Collegiove (RI).',
+    description: 'Sapori autentici e accoglienza familiare a Collegiove (RI).',
     url: 'https://www.tuodominio.it',
   }
 };
