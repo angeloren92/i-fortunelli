@@ -62,7 +62,7 @@ export default function LaNostraStoria() {
 
                         {/* Left Column: Context presentation typography stack */}
                         <div className="flex flex-col justify-center">
-                            <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
+                            <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
                                 {UI_STRINGS.meta.badge}
                             </span>
                             <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-4">

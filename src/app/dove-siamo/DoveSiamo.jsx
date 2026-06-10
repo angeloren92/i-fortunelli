@@ -76,7 +76,7 @@ export default function DoveSiamo() {
 
                 {/* 1. HERO HEADER DELLA PAGINA */}
                 <header className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-                    <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
+                    <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
                         {UI_STRINGS.hero.badge}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
@@ -98,7 +98,7 @@ export default function DoveSiamo() {
                         {/* SCHEDA: POSIZIONE E CONTATTI RAPIDI */}
                         <section className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
                             <h2 className="text-xl font-bold text-stone-900 mb-4 flex items-center gap-3">
-                                <span className="text-amber-600"><FaMapMarkerAlt aria-hidden="true" /></span> {UI_STRINGS.addressCard.heading}
+                                <span className="text-amber-700"><FaMapMarkerAlt aria-hidden="true" /></span> {UI_STRINGS.addressCard.heading}
                             </h2>
                             <p className="text-stone-800 font-semibold text-lg">{UI_STRINGS.addressCard.brandName}</p>
                             <p className="text-stone-600 text-base mt-1 mb-6">{UI_STRINGS.addressCard.fullAddress}</p>
@@ -139,7 +139,7 @@ export default function DoveSiamo() {
                         {/* SCHEDA: ORARI DI APERTURA DETTAGLIATI */}
                         <section className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200/80 shadow-sm">
                             <h2 className="text-xl font-bold text-stone-900 mb-4 flex items-center gap-3">
-                                <span className="text-amber-600"><FaClock aria-hidden="true" /></span> {UI_STRINGS.hoursCard.heading}
+                                <span className="text-amber-700"><FaClock aria-hidden="true" /></span> {UI_STRINGS.hoursCard.heading}
                             </h2>
                             <ul className="space-y-3 text-stone-700">
                                 {/* Closing Day Custom Rendering */}
@@ -203,14 +203,14 @@ export default function DoveSiamo() {
                         </h3>
                         
                         <div className="flex items-start gap-4 bg-stone-50 p-5 rounded-2xl border border-stone-100 loam-relaxed">
-                            <span className="text-amber-600 mt-1 flex-shrink-0" aria-hidden="true"><FaCar size={20} /></span>
+                            <span className="text-amber-700 mt-1 flex-shrink-0" aria-hidden="true"><FaCar size={20} /></span>
                             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
                                 <strong>{UI_STRINGS.parkingCard.car.prefix}</strong> {UI_STRINGS.parkingCard.car.suffix}
                             </p>
                         </div>
                         
                         <div className="flex items-start gap-4 bg-stone-50 p-5 rounded-2xl border border-stone-100 loam-relaxed">
-                            <span className="text-amber-600 mt-1 flex-shrink-0" aria-hidden="true"><FaMotorcycle size={20} /></span>
+                            <span className="text-amber-700 mt-1 flex-shrink-0" aria-hidden="true"><FaMotorcycle size={20} /></span>
                             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
                                 <strong>{UI_STRINGS.parkingCard.motorcycle.prefix}</strong> {UI_STRINGS.parkingCard.motorcycle.suffix}
                             </p>

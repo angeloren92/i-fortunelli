@@ -297,7 +297,7 @@ export default function IlTerritorio() {
 
                     {/* INTRO MAIN PRESENTATION TYPOGRAPHY HEADER */}
                     <header className="text-center max-w-3xl mx-auto mb-16">
-                        <span className="text-xs font-bold tracking-widest text-amber-600 uppercase block mb-2">
+                        <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
                             {UI_STRINGS.header.badge}
                         </span>
                         <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight">
@@ -354,7 +354,7 @@ export default function IlTerritorio() {
                                                     <div className={`p-3 rounded-xl transition-colors ${isExpanded ? 'bg-amber-100' : 'bg-amber-50 group-hover:bg-amber-100'}`}>
                                                         {item.icon}
                                                     </div>
-                                                    <div className={`text-stone-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-amber-600' : 'group-hover:text-stone-600'}`}>
+                                                    <div className={`text-stone-400 transition-transform duration-300 ${isExpanded ? 'rotate-180 text-amber-700' : 'group-hover:text-stone-600'}`}>
                                                         <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
                                                             <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                                         </svg>
