@@ -71,7 +71,7 @@ export default function DoveSiamo() {
     const { businessDetails } = useContext(GlobalContext);
 
     return (
-        <main className="bg-stone-50 min-h-screen py-5 sm:py-10">
+        <main className="bg-stone-50 min-h-screen py-8 sm:py-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                 {/* 1. HERO HEADER DELLA PAGINA */}

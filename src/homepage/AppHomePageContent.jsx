@@ -183,7 +183,7 @@ export default function AppHomePageContent() {
             </section>
 
             {/* SECTION 2: Identity Presentation / Core Structural Narrative Section */}
-            <section className="py-10 md:py-20 bg-stone-100">
+            <section className="py-8 sm:py-16 bg-stone-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
 
                     {/* Left Column Stack: Promotional Text and Facilities Infrastructure Grid */}

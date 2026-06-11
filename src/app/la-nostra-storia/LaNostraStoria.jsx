@@ -13,7 +13,7 @@ const UI_STRINGS = {
     meta: {
         badge: "Benvenuti a tavola",
         title: "La Nostra Storia",
-        subtitle: "Passione, tradizione e amore per il territorio di Collegiove."
+        subtitle: "Passione, tradizione e amore per Collegiove."
     },
     story: {
         paragraph1: {
@@ -53,7 +53,7 @@ export default function LaNostraStoria() {
     return (
         <main>
             {/* Main storytelling section */}
-            <section className="bg-stone-50 py-5 sm:py-10">
+            <section className="bg-stone-50 py-8 sm:py-16">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                     {/* CHAPTER 1: FOUNDATIONS & ROOTS */}
@@ -62,9 +62,6 @@ export default function LaNostraStoria() {
 
                         {/* Left Column: Context presentation typography stack */}
                         <div className="flex flex-col justify-center">
-                            <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
-                                {UI_STRINGS.meta.badge}
-                            </span>
                             <h2 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-4">
                                 {UI_STRINGS.meta.title}
                             </h2>
@@ -72,6 +69,9 @@ export default function LaNostraStoria() {
                                 {UI_STRINGS.meta.subtitle}
                             </p>
                             
+                            <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
+                                {UI_STRINGS.meta.badge}
+                            </span>
                             <div className="space-y-4 text-base text-stone-700 leading-relaxed">
                                 <p>
                                     {UI_STRINGS.story.paragraph1.prefix}

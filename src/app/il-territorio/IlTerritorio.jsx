@@ -292,7 +292,7 @@ export default function IlTerritorio() {
         <main className="w-full min-h-screen flex items-center justify-center">
 
             {/* Elevated context frame wrapper area */}
-            <section className="relative z-10 w-full py-5 sm:py-10 my-5">
+            <section className="relative z-10 w-full py-8 sm:py-16">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                     {/* INTRO MAIN PRESENTATION TYPOGRAPHY HEADER */}
