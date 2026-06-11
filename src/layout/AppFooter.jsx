@@ -2,6 +2,7 @@
 
 import { useState, useContext } from 'react';
 import { GlobalContext } from '@/context/GlobalContext';
+import AppOverlay from '@/components/AppOverlay';
 import { FaFacebook } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { RiGpsFill } from "react-icons/ri";
@@ -17,6 +18,18 @@ import { BsFillTelephoneFill } from "react-icons/bs";
 export default function AppFooter() {
     // Extract business configuration from the global application context
     const { businessDetails } = useContext(GlobalContext);
+    const [overlayOpen, setOverlayOpen] = useState(false);
+    const [overlayType, setOverlayType] = useState(null);
+
+    const openOverlay = (type) => {
+        setOverlayType(type);
+        setOverlayOpen(true);
+    };
+
+    const closeOverlay = () => {
+        setOverlayOpen(false);
+        setOverlayType(null);
+    };
 
     return (
         <footer className="py-6 bg-stone-200 mt-auto">
@@ -78,10 +91,10 @@ export default function AppFooter() {
                         <h5 className="font-semibold text-gray-800">Informazioni</h5>
                         <ul className="mt-4">
                             <li className="flex justify-center md:justify-start mt-2">
-                                <a href="#" className="text-amber-900 hover:underline">Cookie</a>
+                                <button type="button" onClick={() => openOverlay('cookie')} className="text-amber-900 hover:underline">Cookie</button>
                             </li>
                             <li className="flex justify-center md:justify-start mt-2">
-                                <a href="#" className="text-amber-900 hover:underline">Privacy Policy</a>
+                                <button type="button" onClick={() => openOverlay('privacy')} className="text-amber-900 hover:underline">Privacy Policy</button>
                             </li>
                         </ul>
                     </div>
@@ -95,6 +108,7 @@ export default function AppFooter() {
                     </p>
                 </div>
             </div>
+            <AppOverlay open={overlayOpen} onClose={closeOverlay} type={overlayType} />
         </footer>
     );
 }

@@ -233,7 +233,7 @@ export default function AppHomePageContent() {
             </section>
 
             {/* SECTION 3: Visual Social Proof Media Showcase (Mocked Instagram Carousel Grid) */}
-            <section className="py-10 md:py-20 bg-stone-200">
+            <section className="py-10 md:py-20 bg-yellow-400/50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="md:text-center max-w-xl md:mx-auto mb-12">
                         <h2 className="text-3xl md:text-4xl font-extrabold text-stone-800 tracking-tight mb-3">
@@ -283,7 +283,7 @@ export default function AppHomePageContent() {
                 </div>
             </section>
 
-            <section className="py-10 md:py-20 bg-stone-200 bg-stone-300">
+            <section className="py-10 md:py-20 bg-stone-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <AppNewsPaper />
                 </div>
