@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" type="image/avif" href="/favicon.avif" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/logo_white.avif" />
         {/* Inject scripts to browser navigation recovery */}
         <script dangerouslySetInnerHTML={{ __html: bfcacheRecoveryScript }} />
       </head>
