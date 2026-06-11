@@ -94,8 +94,9 @@ const sezioniTerritorioConfig = [
                 id: "pro-loco",
                 title: "Pro Loco Collegiove",
                 short: "Il motore delle nostre tradizioni.",
-                details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
-                tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",
+                details: "Lavori in Corso",
+                /*details: "La Pro Loco locale è costantemente attiva nella promozione turistica, nella cura dei percorsi storici e culturali e nell'accoglienza dei viandanti che scelgono di scoprire Collegiove.",
+                tip: "🤝 Comunità attiva: Collaboriamo strettamente con le iniziative dell'associazione per far vivere ai turisti un'esperienza autentica e integrata.",*/
                 icon: (
                     <FaUsers className="h-6 w-6 text-amber-700" />
                 )
@@ -104,8 +105,9 @@ const sezioniTerritorioConfig = [
                 id: "arte-cultura",
                 title: "Tradizioni ArteCultura",
                 short: "Promozione dell'artigianato locale.",
-                details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri.",
-                tip: "🎨 Curiosità: In occasione delle feste di paese, i nostri spazi si animano ulteriormente ospitando stand dedicati per celebrare le tradizioni locali e vivere la festa insieme alla comunità.",
+                details: "Lavori in Corso",
+                /*details: "Un punto di riferimento essenziale per la valorizzazione del talento locale, delle arti visive e del recupero dei vecchi mestieri.",
+                tip: "🎨 Curiosità: In occasione delle feste di paese, i nostri spazi si animano ulteriormente ospitando stand dedicati per celebrare le tradizioni locali e vivere la festa insieme alla comunità.",*/
                 icon: (
                     <FaPalette className="h-6 w-6 text-amber-700" />
                 )
@@ -144,7 +146,7 @@ const sezioniTerritorioConfig = [
                 title: "Infiorata del Corpus Domini",
                 short: "Gli storici vicoli coperti da disegni.",
                 details: "In occasione della solennità del Corpus Domini, la comunità locale si unisce in una traditione spettacolare: le strade del centro storico vengono rivestite da tappeti artistici figurativi.",
-                tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i tappeti floreali intatti e profumatissimi prima della processione, per poi fermarti a pranzo da noi.",
+                tip: "🌸 Da non perdere: Fai una passeggiata la mattina presto per goderti i disegni intatti e coloratissimi prima della processione, per poi fermarti a pranzo da noi.",
                 icon: (
                     <GiFlowerTwirl className="h-6 w-6 text-amber-700" />
                 ),
@@ -232,7 +234,7 @@ function CarouselOttimizzato({ images, altTextBase, priorityLoad }) {
                 alt={`${altTextBase} slide ${currentIndex + 1}`}
                 fill
                 priority={priorityLoad && currentIndex === 0}
-                sizes="(max-w: 768px) 50vw, (max-w: 1280px) 50vw, 1024px"
+                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 50vw, 1024px"
                 className="object-cover transition-all duration-500 select-none pointer-events-none"
             />
 
@@ -391,7 +393,7 @@ export default function IlTerritorio() {
                                                                     </div>
                                                                 ) : (
                                                                     /* --- Standard Native 1:1 Aspect Ratio Video Frame Player --- */
-                                                                    <div 
+                                                                    <div
                                                                         className="relative w-full aspect-square rounded-xl overflow-hidden shadow-inner border border-stone-200/60 bg-black cursor-default"
                                                                         onClick={(e) => e.stopPropagation()}
                                                                     >
