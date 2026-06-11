@@ -139,7 +139,7 @@ const sezioniTerritorioConfig = [
                 icon: (
                     <FaMusic className="h-6 w-6 text-amber-700" />
                 ),
-                media: ["/territorio/ferr1.avif", "/territorio/ferr2.avif", "/territorio/ferr3.avif", "/territorio/ferr4.avif", "/territorio/ferr5.avif"]
+                media: ["/territorio/fer1.avif", "/territorio/fer2.avif", "/territorio/fer3.avif", "/territorio/fer4.avif", "/territorio/fer5.avif", "/territorio/fer6.avif", "/territorio/fer7.avif", "/territorio/fer8.avif"]
             },
             {
                 id: "infiorata",
