@@ -103,9 +103,15 @@ export default function AppFooter() {
 
                 {/* Footer Copyright and Legal Rights Notice */}
                 <div className="flex justify-center mt-6">
-                    <p className="text-gray-500">
+                    <p className="text-gray-700">
                         &copy; {new Date().getFullYear()} I Fortunelli. Tutti i diritti riservati.
                     </p>
+                </div>
+                <div className="flex justify-center lg:justify-end mt-2 items-center">
+                    <a href="https://ar-it.dev" target="_blank" rel="noopener noreferrer">
+                        <img src="ar-it_logo.png" alt="AR-IT Logo" width={33} height={33} className="" />
+                    </a>
+                    <a href="https://ar-it.dev" target="_blank" rel="noopener noreferrer" className="hover:underline ml-1 text-stone-800">Made by AR-IT.dev</a>
                 </div>
             </div>
             <AppOverlay open={overlayOpen} onClose={closeOverlay} type={overlayType} />

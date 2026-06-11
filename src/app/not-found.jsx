@@ -55,7 +55,7 @@ export default function InlineNotFound({
       {/* Unified Call-to-Action button */}
       <Link
         href="/"
-        className="px-6 py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors duration-300"
+        className="px-6 py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700  transition-colors duration-300"
       >
         Torna alla homepage
       </Link>
