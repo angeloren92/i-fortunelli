@@ -101,16 +101,20 @@ export default function AppOverlay({ open, onClose, type }) {
         <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="absolute inset-0 bg-black/50" onClick={onClose} aria-hidden="true" />
 
-            <div role="dialog" aria-modal="true" className="relative bg-white max-w-xl w-[90%] rounded-xl p-6 shadow-lg m-4">
+            <div
+                role="dialog"
+                aria-modal="true"
+                className="relative bg-white max-w-xl w-[90%] max-h-[80%] rounded-xl p-6 md:p-10 shadow-lg m-4 flex flex-col"
+            >
                 <button
                     onClick={onClose}
-                    className="absolute right-3 top-3 text-stone-500 hover:text-stone-700"
+                    className="absolute right-4 top-4 text-stone-500 hover:text-stone-700 z-10 p-1 rounded-lg hover:bg-stone-100 transition-colors"
                     aria-label="Chiudi"
                 >
                     ✕
                 </button>
 
-                <div className="mt-2">
+                <div className="mt-4 flex-1 overflow-y-auto pr-2 text-stone-700">
                     {content}
                 </div>
             </div>
