@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { FaWhatsapp } from "react-icons/fa";
 import { useContext } from "react";
 import { GlobalContext } from "../context/GlobalContext";
+import AppNewsPaper from "./AppNewsPaper";
 
 /**
  * DICTIONARY LAYER: CENTRALIZED UI STRINGS CONFIGURATION
@@ -172,8 +173,8 @@ export default function AppHomePageContent() {
                         {UI_STRINGS.hero.subtitle}
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
-                        <a 
-                            href={`tel:${businessDetails.tel1 || businessDetails.tel2 || ''}`} 
+                        <a
+                            href={`tel:${businessDetails.tel1 || businessDetails.tel2 || ''}`}
                             className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 px-8 rounded-full transition duration-300 shadow-lg text-center transform hover:-translate-y-0.5"
                         >
                             {UI_STRINGS.hero.cta}
@@ -282,6 +283,12 @@ export default function AppHomePageContent() {
                 </div>
             </section>
 
+            <section className="py-10 md:py-20 bg-stone-200 bg-stone-300">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <AppNewsPaper />
+                </div>
+            </section>
+
             {/* SECTION 4: Logistics Framework, Operating Hours Matrix, & Interactive Map Integrations */}
             <section className="py-10 md:py-20 bg-stone-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-stretch gap-12">
@@ -321,7 +328,7 @@ export default function AppHomePageContent() {
                                 <p className="text-stone-700 text-base mb-1 font-medium">{UI_STRINGS.logistics.brandName}</p>
                                 <p className="text-stone-600 text-base mb-4">{businessDetails.address}</p>
                                 <div className="text-stone-800 font-semibold pt-2 border-t border-stone-100">
-                                    
+
                                     {/* Voice Call & Instant Message Line Channel 1 */}
                                     <div className="flex mb-2 items-center justify-between">
                                         <span>{UI_STRINGS.logistics.phoneLabel} <a href={`tel:${businessDetails.tel1}`} className="text-emerald-700 hover:underline"> {businessDetails.tel1}</a></span>
