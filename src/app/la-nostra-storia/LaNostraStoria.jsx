@@ -28,7 +28,7 @@ const UI_STRINGS = {
         secondaryImageAlt: "Scorcio dell'accoglienza alla Trattoria I Fortunelli",
         
         // Nuova configurazione per la galleria immagini
-        galleryTitle: "I Nostri Spazi e le Nostre Specialità",
+        galleryTitle: "I Nostri Spazi e Specialità",
         gallery: [
             { src: "/la-nostra-storia/scaffale1.avif", alt: "Scaffale con i prodotti tipici", styles: "col-span-1 md:col-span-2 aspect-square" },
             { src: "/la-nostra-storia/macchina_caffe.avif", alt: "La nostra macchina del caffè", styles: "col-span-1 md:col-span-2 aspect-square" },
@@ -101,7 +101,7 @@ export default function LaNostraStoria() {
                     {/* CHAPTER 2: VISUAL GALLERY */}
                     {/* Bento-box style photo grid to showcase the newly added un-tracked assets */}
                     <div className="mt-16 pt-12">
-                        <h3 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-10 text-center">
+                        <h3 className="text-3xl sm:text-5xl font-bold text-stone-900 tracking-tight mb-10 md:text-center">
                             {UI_STRINGS.assets.galleryTitle}
                         </h3>
                         

@@ -296,7 +296,7 @@ export default function IlTerritorio() {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
                     {/* INTRO MAIN PRESENTATION TYPOGRAPHY HEADER */}
-                    <header className="text-center max-w-3xl mx-auto mb-16">
+                    <header className="md:text-center max-w-3xl mx-auto mb-16">
                         <span className="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-2">
                             {UI_STRINGS.header.badge}
                         </span>
