@@ -22,36 +22,43 @@ export default function InlineNotFound({
   };
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center py-16 px-6 bg-white dark:bg-neutral-950 transition-colors duration-300 text-center">
+    <div className="w-full min-h-[85dvh] flex flex-col items-center justify-center py-16 px-6 text-center">
 
       {/* Logo container with premium styling */}
-      <div className="mb-10">
+      <div className="mb-10 hover:scale-105 transition-transform duration-300">
         <Link
           href="/"
           onClick={handleLogoClick}
-          className="inline-block p-4 border border-neutral-200 dark:border-neutral-800 shadow-xl bg-white dark:bg-neutral-900 transition-all duration-300 hover:border-[#C5A059]/50 hover:shadow-2xl hover:scale-105 active:scale-95"
+          className="inline-block p-4 border border-neutral-200 shadow-xl"
         >
           <Image
-            src="/logo.avif"
+            src="/logo_white.avif"
             alt="Logo"
             width={150}
             height={150}
-            className="w-[150px] h-auto aspect-square object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-105 active:scale-95 mx-auto"
+            className="w-[150px] h-auto aspect-square object-contain mx-auto"
+            loading="eager"
           />
         </Link>
       </div>
 
       {/* Main heading with clean typography */}
-      <h3 className="text-lg md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+      <h3 className="text-lg font-bold mb-4">
         404 | <span className="">{title}</span>
       </h3>
 
       {/* Informational error message */}
-      <p className="text-neutral-600 dark:text-neutral-400 mb-10 text-center max-w-md leading-relaxed whitespace-pre-line">
+      <p className="mb-10 text-center max-w-md leading-relaxed whitespace-pre-line">
         {message}
       </p>
 
       {/* Unified Call-to-Action button */}
+      <Link
+        href="/"
+        className="px-6 py-3 bg-emerald-600 text-white font-medium rounded-lg hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors duration-300"
+      >
+        Torna alla homepage
+      </Link>
 
     </div>
   );
